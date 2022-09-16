@@ -36,16 +36,19 @@ export default defineConfig({
   ],
   server: {
     port: 8080, //启动端口
+    open: false, //浏览器自动打开页面
+    https: false,
     hmr: {
       host: '127.0.0.1',
       port: 8080
     },
-    // 设置 https 代理
+    // 设置 http 代理 跨域
     proxy: {
       '/api': {
-        target: 'your https address',
-        changeOrigin: true,
-        rewrite: (path: string) => path.replace(/^\/api/, '')
+        target: 'http://10.8.9.98:3000', //需要访问的地址
+        changeOrigin: true,   //是否跨域
+        secure: false,        //是否https接口
+        rewrite: path => path.replace(/^\/api/, ''),   // 路径重写
       }
     }
   }
