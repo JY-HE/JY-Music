@@ -30,7 +30,7 @@ class ApiInitializer {
 
     // 初始化api，将api的config转为request
     decoratorApi(configs: any) {
-        console.log("Rd ~ file: init.ts ~ line 37 ~ ApiInitializer ~ decoratorApi ~ configs", configs)
+        console.debug("Rd ~ file: init.ts ~ line 37 ~ ApiInitializer ~ decoratorApi ~ configs", configs)
         const configsType: string = Object.prototype.toString.call(configs);
         const methods: any = {}
 
@@ -53,8 +53,6 @@ class ApiInitializer {
             default:
                 break;
         }
-
-        console.log("Rd ~ file: init.ts ~ line 66 ~ ApiInitializer ~ decoratorApi ~ methods", methods.getSingerCategory)
         return methods;
     }
 }
