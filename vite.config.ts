@@ -32,16 +32,14 @@ export default defineConfig({
   // elementUi组件自动引入
   Components({
     resolvers: [ElementPlusResolver()],
+    dts: 'src/components.d.ts',
   }),
   ],
   server: {
     port: 8080, //启动端口
-    open: false, //浏览器自动打开页面
+    open: true, //浏览器自动打开页面
     https: false,
-    hmr: {
-      host: '127.0.0.1',
-      port: 8080
-    },
+    hmr: true,
     // 设置 http 代理 跨域
     proxy: {
       '/api': {
@@ -51,5 +49,15 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/api/, ''),   // 路径重写
       }
     }
-  }
+  },
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: `
+  //         @import '@/assets/scss/variables.scss';
+  //         @import '@/assets/scss/main.scss';
+  //        `,
+  //     },
+  //   },
+  // },
 });

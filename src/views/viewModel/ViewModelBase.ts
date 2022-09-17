@@ -1,21 +1,14 @@
 // 业务API基类
-import { apiInitializer } from '@/api/init';
+import bizService from '@/service/index'
 import { RequestMethodsInterface } from '@/types/SingerBizApiInterface'
-
-
-interface BizApiService {
-    _loginBizApi: any
-    _singerBizApi: RequestMethodsInterface | undefined
-}
-
-class ViewModelBase implements BizApiService {
+class ViewModelBase {
     _loginBizApi: any
     _singerBizApi: RequestMethodsInterface | undefined
 
     constructor() {
         // 业务请求类
-        this._loginBizApi = apiInitializer.loginBizApi;
-        this._singerBizApi = apiInitializer.singerBizApi;
+        this._loginBizApi = bizService.loginBizApi;
+        this._singerBizApi = bizService.singerBizApi;
     }
 }
 

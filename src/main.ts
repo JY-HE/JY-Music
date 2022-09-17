@@ -1,20 +1,18 @@
 import { createApp } from 'vue'
-import './style.css'
+import '@/assets/css/public.css'
 import App from './App.vue'
 import store from './store'
 import router from '@/router';
-import { apiInitializer } from './api/init'
+import bizService from '@/service'
 
 // 创建vue实例
 const app = createApp(App)
 
-// 业务api初始化，构建各个业务api
-await apiInitializer.init({ token: '', config: {} });
+// 初始化业务层
+bizService.init()
 
-// 挂载pinia
-app.use(store)
-// 挂载vue-router
-app.use(router);
+// 添加到全局中
+// app.config.globalProperties.$Test = viewModelBase
 
-// 挂载实例
-app.mount('#app');
+app.use(store).use(router).mount('#app')
+

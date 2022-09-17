@@ -16,3 +16,5 @@ class SingerViewModel extends ViewModelBase {
 
 const singerViewModel = new SingerViewModel();
 export default singerViewModel;
+
+
