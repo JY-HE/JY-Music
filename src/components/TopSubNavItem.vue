@@ -1,5 +1,5 @@
 <template>
-    <div :class="['top-nav-item', active && 'active']" @click="navItemClick">
+    <div :class="['top-subnav-item', active && 'active']" @click="subnavItemClick">
         <router-link :to="itemLink">
             {{ itemName }}
         </router-link>
@@ -14,32 +14,27 @@ defineProps({
 });
 const emit = defineEmits(['click']);
 
-const navItemClick = (event: MouseEvent) => {
+const subnavItemClick = (event: MouseEvent) => {
     emit('click', event);
 };
 </script>
 
 <style lang="scss">
-.top-nav-item {
+.top-subnav-item {
     height: 100%;
     padding: 0 pxToRem(20);
     text-align: center;
-    line-height: pxToRem(90);
+    line-height: pxToRem(52);
     @include cursor;
     background: #fff;
-    font-size: pxToRem(18);
+    font-size: pxToRem(16);
+    color: #000;
 
     a {
         color: #000;
     }
 
-    &.active {
-        background: #31c27c;
-        a {
-            color: #fff;
-        }
-    }
-
+    &.active,
     &:hover {
         a {
             color: #31c27c;

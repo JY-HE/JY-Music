@@ -3,7 +3,7 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
-export {}
+export { }
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TopNavItem: typeof import('./components/TopNavItem.vue')['default']
+    TopSubNavItem: typeof import('./components/TopSubNavItem.vue')['default']
     UsePinia: typeof import('./components/UsePinia.vue')['default']
   }
 }

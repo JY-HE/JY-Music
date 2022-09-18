@@ -5,13 +5,14 @@
             <TopNav></TopNav>
         </div>
         <div class="head-view-bottom">
-            <div class="top-subnav"></div>
+            <TopSubNav></TopSubNav>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import TopNav from './components/TopNav.vue';
+import TopSubNav from './components/TopSubNav.vue';
 </script>
 <style lang="scss">
 .head-view {
