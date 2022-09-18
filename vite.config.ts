@@ -56,6 +56,7 @@ export default defineConfig({
       scss: {
         additionalData: `
           @import '@/assets/scss/main.scss';
+          @import '@/assets/scss/theme.scss';
           @import 'jy-web-style/src/index.scss';
          `,
       },

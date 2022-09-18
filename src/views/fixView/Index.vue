@@ -1,14 +1,18 @@
 <template>
-    <div class="index-view">1234</div>
+    <div class="index-view">
+        <DetailModule></DetailModule>
+    </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import setThemeStyle from '@/utils/theme';
+
+setTimeout(() => {
+    setThemeStyle('fontColor', '#fff');
+}, 3000);
+</script>
 <style lang="scss">
 .index-view {
-    // @include wh;
-
     flex: 1;
-    // font-size: pxToRem(16);
-    // @include flexCenter(center, center, true);
 }
 </style>

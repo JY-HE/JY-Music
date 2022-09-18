@@ -5,7 +5,6 @@ import App from './App.vue'
 import store from './store'
 import router from '@/router';
 import bizService from '@/service'
-
 // 创建vue实例
 const app = createApp(App)
 
@@ -13,7 +12,7 @@ const app = createApp(App)
 bizService.init()
 
 // 添加到全局中
-// app.config.globalProperties.$Test = viewModelBase
+// app.config.globalProperties.$setThemeStyle = setThemeStyle
 
 app.use(store).use(router).mount('#app')
 
