@@ -8,9 +8,11 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    Logo: typeof import('./components/Logo.vue')['default']
     Request: typeof import('./components/Request.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TopNavItem: typeof import('./components/TopNavItem.vue')['default']
     UsePinia: typeof import('./components/UsePinia.vue')['default']
   }
 }
