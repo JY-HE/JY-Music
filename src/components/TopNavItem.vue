@@ -39,6 +39,11 @@ const navItemClick = (event: MouseEvent) => {
             color: #fff;
         }
     }
+    &.active:hover {
+        a {
+            color: #fff;
+        }
+    }
 
     &:hover {
         a {
