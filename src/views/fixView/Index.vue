@@ -1,6 +1,7 @@
 <template>
     <div class="index-view">
         <DetailModule></DetailModule>
+        <Request></Request>
     </div>
 </template>
 

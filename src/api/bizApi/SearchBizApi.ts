@@ -1,10 +1,10 @@
-// 歌手相关api配置
-import { SingerCategoryInterface, SingerRequestConfigsInterface } from '@/types/SingerBizApiInterface'
+// 搜索相关api配置
+import { SearchInterface, SearchRequestConfigsInterface } from '@/types/SearchBizApiInterface'
 
-class SingerBizApi {
+class SearchBizApi {
     // 定义属性
     preUrl: string
-    requestConfigs: SingerRequestConfigsInterface | undefined
+    requestConfigs: SearchRequestConfigsInterface | undefined
 
     constructor() {
         this.preUrl = '/api';
@@ -12,9 +12,9 @@ class SingerBizApi {
     }
 
     initRequestConfigs() {
-        const configs: SingerRequestConfigsInterface = {
-            // 获取歌手分类列表
-            getSingerCategory: (params: SingerCategoryInterface) => this._getConfig('/artist/list/', 'get', params),
+        const configs: SearchRequestConfigsInterface = {
+            // 关键词搜索
+            keywordSearch: (params: SearchInterface) => this._getConfig('/cloudsearch', 'get', params),
 
         };
         this.requestConfigs = configs;
@@ -36,5 +36,5 @@ class SingerBizApi {
     }
 }
 
-const singerBizApi = new SingerBizApi();
-export default singerBizApi;
+const searchBizApi = new SearchBizApi();
+export default searchBizApi;

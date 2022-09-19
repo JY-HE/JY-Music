@@ -9,13 +9,13 @@ export interface SingerCategoryInterface {
 }
 
 // 请求配置对象接口
-export interface RequestConfigsInterface {
+export interface SingerRequestConfigsInterface {
     // 获取歌手分类列表配置
     getSingerCategory: (params: SingerCategoryInterface) => AxiosRequestConfig
 }
 
 // 请求实例方法接口
-export interface RequestMethodsInterface {
+export interface SingerRequestMethodsInterface {
     // 获取歌手分类列表方法
     getSingerCategory: (params: SingerCategoryInterface) => Promise<AxiosResponse>
 }

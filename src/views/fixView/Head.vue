@@ -3,6 +3,7 @@
         <div class="head-view-top">
             <Logo></Logo>
             <TopNav></TopNav>
+            <SearchInput></SearchInput>
             <PersonalCenter></PersonalCenter>
         </div>
         <div class="head-view-bottom">
@@ -27,6 +28,10 @@ import PersonalCenter from './components/PersonalCenter.vue';
 
         .top-nav {
             margin: 0 pxToRem(30);
+        }
+
+        .search-input {
+            margin-right: pxToRem(30);
         }
     }
 

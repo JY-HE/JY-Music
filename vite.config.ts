@@ -43,8 +43,8 @@ export default defineConfig({
     // 设置 http 代理 跨域
     proxy: {
       '/api': {
-        target: 'http://10.8.9.98:3000', //需要访问的地址
-        // target: 'http://192.168.1.101:3000',
+        // target: 'http://10.8.9.98:3000', //需要访问的地址
+        target: 'http://192.168.1.101:3000',
         changeOrigin: true,   //是否跨域
         secure: false,        //是否https接口
         rewrite: path => path.replace(/^\/api/, ''),   // 路径重写
