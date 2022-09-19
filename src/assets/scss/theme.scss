@@ -1,8 +1,14 @@
 :root {
     // 值为 initial 才为空值
-    --fontColor: initial;
-    --backgroundColor: initial;
-    --backgroundHoverColor: initial;
-    --backgroundDisableColor: initial;
-    --borderColor: initial;
+
+    // 整体主题色
+    --theme-color: initial;
+    // 主题背景色
+    --theme-background-color: initial;
+    // 字体基础颜色
+    --font-base-color: initial;
+    // 字体悬浮颜色
+    --font-hover-color: var(--themeColor);
+    // 边框基础颜色
+    --border-base-color: initial;
 }

@@ -1,0 +1,31 @@
+// 字体基础颜色
+@mixin fontBaseColor {
+    color: var(--font-base-color);
+}
+
+// 字体悬浮颜色
+@mixin fontHoverColor {
+    @include hover {
+        color: var(--font-hover-color);
+    }
+}
+
+// logo文字样式
+@mixin logoStyle {
+    color: var(--font-base-color);
+}
+
+// 一级导航栏选中样式
+@mixin navSelected {
+    background: var(--theme-color);
+    a {
+        color: var(--theme-background-color);
+    }
+}
+
+// 二级导航栏选中样式
+@mixin subNavSelected {
+    a {
+        color: var(--theme-color);
+    }
+}

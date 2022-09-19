@@ -1,18 +1,33 @@
-import { createApp } from 'vue'
-import '@/assets/css/public.css'
-import '@/utils/resize'
-import App from './App.vue'
-import store from './store'
-import router from '@/router';
-import bizService from '@/service'
-// 创建vue实例
-const app = createApp(App)
+// import { createApp } from 'vue'
+// import { createPinia } from 'pinia'
+// import App from './App.vue'
+// import '@/assets/css/public.css'
+// import '@/utils/resize'
+// import configInit from '@/config/init';
+// // import store from './store'
+// import router from '@/router';
+// import bizService from '@/service'
+
+// 配置初始化，获取本地配置
+// configInit()
 
 // 初始化业务层
-bizService.init()
+// bizService.init()
 
-// 添加到全局中
-// app.config.globalProperties.$setThemeStyle = setThemeStyle
+// const pinia = createPinia()
 
-app.use(store).use(router).mount('#app')
+// 创建 vue 实例
+// const app = createApp(App)
+
+// 挂载 pinia
+// app.use(pinia)
+
+
+
+// app.use(router).mount('#app')
+
+import Core from '@/core/Core';
+
+const core = new Core();
+core.startup();
 

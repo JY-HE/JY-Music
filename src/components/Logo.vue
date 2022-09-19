@@ -17,5 +17,9 @@
         @include whrem(64);
         margin-right: pxToRem(12);
     }
+
+    h1 {
+        @include logoStyle;
+    }
 }
 </style>

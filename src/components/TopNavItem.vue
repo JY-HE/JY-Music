@@ -26,28 +26,25 @@ const navItemClick = (event: MouseEvent) => {
     text-align: center;
     line-height: pxToRem(90);
     @include cursor;
-    background: #fff;
+    background: var(--theme-background-color);
     font-size: pxToRem(18);
 
     a {
-        color: #000;
+        color: var(--font-base-color);
     }
 
     &.active {
-        background: #31c27c;
-        a {
-            color: #fff;
-        }
+        @include navSelected;
     }
     &.active:hover {
         a {
-            color: #fff;
+            color: var(--theme-background-color);
         }
     }
 
     &:hover {
         a {
-            color: #31c27c;
+            color: var(--theme-color);
         }
     }
 }

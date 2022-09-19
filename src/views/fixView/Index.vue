@@ -4,13 +4,8 @@
     </div>
 </template>
 
-<script lang="ts" setup>
-import setThemeStyle from '@/utils/theme';
+<script lang="ts" setup></script>
 
-setTimeout(() => {
-    setThemeStyle('fontColor', '#fff');
-}, 3000);
-</script>
 <style lang="scss">
 .index-view {
     flex: 1;

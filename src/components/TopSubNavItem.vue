@@ -26,19 +26,16 @@ const subnavItemClick = (event: MouseEvent) => {
     text-align: center;
     line-height: pxToRem(52);
     @include cursor;
-    background: #fff;
+    background: var(--theme-background-color);
     font-size: pxToRem(16);
-    color: #000;
 
     a {
-        color: #000;
+        color: var(--font-base-color);
     }
 
     &.active,
     &:hover {
-        a {
-            color: #31c27c;
-        }
+        @include subNavSelected;
     }
 }
 </style>
