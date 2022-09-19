@@ -16,6 +16,5 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     TopNavItem: typeof import('./components/TopNavItem.vue')['default']
     TopSubNavItem: typeof import('./components/TopSubNavItem.vue')['default']
-    UsePinia: typeof import('./components/UsePinia.vue')['default']
   }
 }
