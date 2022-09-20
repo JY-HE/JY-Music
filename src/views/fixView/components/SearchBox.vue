@@ -63,6 +63,7 @@ const songClick = (songId: string) => {
     width: pxToRem(220);
     margin-right: pxToRem(30);
     position: relative;
+    z-index: 100;
 
     .search-input {
         @include whrem(100%, 38);
@@ -71,7 +72,7 @@ const songClick = (songId: string) => {
         @include whrem(100%, 220);
         @include position(absolute, top pxToRem(40));
         border: pxToRem(1) solid #ccc;
-        background: var(--theme-background-color);
+        background: rgba(var(--theme-background-color), 1);
 
         ul {
             @include wh;
@@ -80,7 +81,7 @@ const songClick = (songId: string) => {
             padding: 0;
 
             li {
-                color: var(--font-base-color);
+                color: rgba(var(--font-base-color), 1);
                 font-size: pxToRem(14);
                 @include whrem(100%, 36);
                 text-align: left;
@@ -88,6 +89,9 @@ const songClick = (songId: string) => {
                 padding-left: pxToRem(10);
                 @include textEllipsis;
                 @include cursor;
+                &:hover {
+                    color: rgba(var(--theme-color), 1);
+                }
             }
         }
     }
