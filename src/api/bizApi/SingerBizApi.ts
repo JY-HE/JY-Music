@@ -7,7 +7,7 @@ class SingerBizApi {
     requestConfigs: SingerRequestConfigsInterface | undefined
 
     constructor() {
-        this.preUrl = '/api';
+        this.preUrl = '/cloud/api';
         this.initRequestConfigs();
     }
 

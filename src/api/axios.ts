@@ -7,6 +7,7 @@ const service = axios.create({
 // Request interceptors
 service.interceptors.request.use(
     (config: AxiosRequestConfig) => {
+        console.log("Rd ~ file: axios.ts ~ line 10 ~ config", config)
         // do something
         return config;
     },
@@ -18,6 +19,7 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
     async (response: AxiosResponse) => {
+        console.log("Rd ~ file: axios.ts ~ line 21 ~ response", response)
         // do something
         return response.data
     },
