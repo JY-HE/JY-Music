@@ -1,7 +1,7 @@
 <template>
-    <div class="personal-center-view" @mouseenter="onMouseEnter">
-        <div class="view-box" @mouseleave="onMouseLeave">
-            <div class="label">个人中心</div>
+    <div class="personal-center-view">
+        <div :class="['view-box', state.showSelectBox ? ' uparrow' : 'downarrow']">
+            <div class="label" @click.stop="handlerSelectBox">个人中心</div>
             <div class="select__box" v-show="state.showSelectBox">
                 <ui>
                     <li class="color-block">
@@ -9,7 +9,7 @@
                         <el-color-picker
                             v-model="state.color"
                             @change="colorPicker"
-                            popper-class="color__picker"
+                            color-format="rgb"
                         />
                     </li>
                 </ui>
@@ -22,7 +22,6 @@
 import theme from '@/utils/theme';
 import { InitStore } from '@/store/initStore';
 
-const viewBoxRef = ref<null | HTMLElement>(null);
 const initStore = InitStore();
 const state = reactive<{
     config: any;
@@ -31,63 +30,52 @@ const state = reactive<{
 }>({
     config: {},
     color: '',
-    showSelectBox: true,
+    showSelectBox: false,
 });
 
 state.config = initStore.config;
-state.color = state.config?.defaultTheme['theme-color'];
+state.color = `rgb(${state.config?.defaultTheme['theme-color']})`;
 
 const colorPicker = (newColor: string) => {
-    theme.setThemeColor(newColor);
-    state.showSelectBox = false;
+    const colorNumber = newColor.match(/(?<=\().*(?=\))/g);
+    theme.setThemeColor(colorNumber[0]);
+    // 更改 pinia 中的配置项 theme-color
+    initStore.setConfiguration('defaultTheme', 'theme-color', colorNumber[0]);
+    // 解决取色板关闭时的BUG
+    setTimeout(() => {
+        state.showSelectBox = false;
+    }, 500);
 };
 
-const onMouseEnter = () => {
-    state.showSelectBox = true;
-};
-
-const onMouseLeave = (event: MouseEvent) => {
-    state.showSelectBox = event.toElement.className.includes('color__picker');
+const handlerSelectBox = () => {
+    state.showSelectBox = !state.showSelectBox;
 };
 </script>
 
 <style lang="scss">
 .personal-center-view {
     @include whrem(122, 38);
-    color: var(--theme-background-color);
+    color: rgba(var(--theme-background-color), 1);
     @include cursor;
     z-index: 100;
 
-    .view-box {
+    .view-box,
+    .uparrow,
+    .downarrow {
         width: 100%;
         position: relative;
-
-        @include after {
-            @include position(absolute, top pxToRem(18) right pxToRem(10));
-            @include whrem(0);
-            border-left: pxToRem(4) solid transparent;
-            border-right: pxToRem(4) solid transparent;
-            border-top: pxToRem(6) solid;
-        }
-        &:hover {
-            &::after {
-                @include position(absolute, top pxToRem(10) right pxToRem(10));
-                border-top: pxToRem(6) solid transparent;
-                border-bottom: pxToRem(6) solid;
-            }
-        }
 
         .label {
             @include whrem(100%, 38);
             @include flexCenter;
-            background: var(--theme-color);
+            background: rgba(var(--theme-color), 1);
         }
 
         .select__box {
-            background: var(--theme-background-color);
+            background: rgba(var(--theme-background-color), 1);
             width: 100%;
             border: pxToRem(1) solid #ccc;
-            color: var(--font-base-color);
+            color: rgba(var(--font-base-color), 1);
             margin-top: pxToRem(2);
 
             li {
@@ -95,7 +83,7 @@ const onMouseLeave = (event: MouseEvent) => {
                 height: pxToRem(38);
                 border-bottom: pxToRem(1) solid #ccc;
                 &:hover {
-                    background: var(--theme-color);
+                    background: rgba(var(--theme-color), 1);
                 }
                 &:last-child {
                     border-bottom: none;
@@ -105,6 +93,26 @@ const onMouseLeave = (event: MouseEvent) => {
             .color-block {
                 @include flexCenter(space-around);
             }
+        }
+    }
+
+    .uparrow {
+        @include after {
+            @include position(absolute, top pxToRem(18) right pxToRem(10));
+            @include whrem(0);
+            border-left: pxToRem(4) solid transparent;
+            border-right: pxToRem(4) solid transparent;
+            border-bottom: pxToRem(6) solid;
+        }
+    }
+
+    .downarrow {
+        @include after {
+            @include position(absolute, top pxToRem(18) right pxToRem(10));
+            @include whrem(0);
+            border-left: pxToRem(4) solid transparent;
+            border-right: pxToRem(4) solid transparent;
+            border-top: pxToRem(6) solid;
         }
     }
 }

@@ -1,31 +1,31 @@
 // 字体基础颜色
 @mixin fontBaseColor {
-    color: var(--font-base-color);
+    color: rgba(var(--font-base-color), 1);
 }
 
 // 字体悬浮颜色
 @mixin fontHoverColor {
     @include hover {
-        color: var(--font-hover-color);
+        color: rgba(var(--font-hover-color), 1);
     }
 }
 
 // logo文字样式
 @mixin logoStyle {
-    color: var(--font-base-color);
+    color: rgba(var(--font-base-color), 1);
 }
 
 // 一级导航栏选中样式
 @mixin navSelected {
-    background: var(--theme-color);
+    background: rgba(var(--theme-color), 1);
     a {
-        color: var(--theme-background-color);
+        color: rgba(var(--theme-background-color), 1);
     }
 }
 
 // 二级导航栏选中样式
 @mixin subNavSelected {
     a {
-        color: var(--theme-color);
+        color: rgba(var(--theme-color), 1);
     }
 }

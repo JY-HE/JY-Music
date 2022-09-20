@@ -3,7 +3,7 @@
         <div class="head-view-top">
             <Logo></Logo>
             <TopNav></TopNav>
-            <SearchInput></SearchInput>
+            <SearchBox></SearchBox>
             <PersonalCenter></PersonalCenter>
         </div>
         <div class="head-view-bottom">
@@ -16,6 +16,7 @@
 import TopNav from './components/TopNav.vue';
 import TopSubNav from './components/TopSubNav.vue';
 import PersonalCenter from './components/PersonalCenter.vue';
+import SearchBox from './components/SearchBox.vue';
 </script>
 <style lang="scss">
 .head-view {

@@ -1,8 +1,8 @@
 {
     "title": "JY音乐",
     "defaultTheme": {
-        "theme-color": "#31c27c",
-        "theme-background-color": "#fff",
-        "font-base-color": "#000"
+        "theme-color": "49,194,124",
+        "theme-background-color": "255,255,255",
+        "font-base-color": "0,0,0"
     }
 }

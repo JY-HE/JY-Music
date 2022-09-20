@@ -8,7 +8,7 @@
     // 字体基础颜色
     --font-base-color: initial;
     // 字体悬浮颜色
-    --font-hover-color: var(--themeColor);
+    --font-hover-color: rgba(var(--themeColor, 1));
     // 边框基础颜色
     --border-base-color: initial;
 }

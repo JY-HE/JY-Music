@@ -26,11 +26,11 @@ const navItemClick = (event: MouseEvent) => {
     text-align: center;
     line-height: pxToRem(90);
     @include cursor;
-    background: var(--theme-background-color);
+    background: rgba(var(--theme-background-color), 1);
     font-size: pxToRem(18);
 
     a {
-        color: var(--font-base-color);
+        color: rgba(var(--font-base-color), 1);
     }
 
     &.active {
@@ -38,13 +38,13 @@ const navItemClick = (event: MouseEvent) => {
     }
     &.active:hover {
         a {
-            color: var(--theme-background-color);
+            color: rgba(var(--theme-background-color), 1);
         }
     }
 
     &:hover {
         a {
-            color: var(--theme-color);
+            color: rgba(var(--theme-color), 1);
         }
     }
 }

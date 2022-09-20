@@ -26,11 +26,11 @@ const subnavItemClick = (event: MouseEvent) => {
     text-align: center;
     line-height: pxToRem(52);
     @include cursor;
-    background: var(--theme-background-color);
+    background: rgba(var(--theme-background-color), 1);
     font-size: pxToRem(16);
 
     a {
-        color: var(--font-base-color);
+        color: rgba(var(--font-base-color), 1);
     }
 
     &.active,
