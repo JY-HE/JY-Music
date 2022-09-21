@@ -16,6 +16,8 @@ export interface SearchRequestConfigsInterface {
     keywordSearch: (params: SearchInterface) => AxiosRequestConfig
     // 获取音乐url配置
     getSongUrl: (params: SongUrlInterface) => AxiosRequestConfig
+    // 获取热搜列表配置
+    getSongHot: () => AxiosRequestConfig
 }
 
 // 请求实例方法接口
@@ -24,4 +26,7 @@ export interface SearchRequestMethodsInterface {
     keywordSearch: (params: SearchInterface) => Promise<AxiosResponse>
     // 获取音乐url方法
     getSongUrl: (params: SongUrlInterface) => Promise<AxiosResponse>
+    // 获取热搜列表方法
+    getSongHot: () => Promise<AxiosResponse>
+
 }

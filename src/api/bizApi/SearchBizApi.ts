@@ -18,6 +18,8 @@ class SearchBizApi {
             keywordSearch: (params: SearchInterface) => this._getConfig('/cloudsearch', 'get', params),
             // 获取歌曲url播放地址
             getSongUrl: (params: SongUrlInterface) => this._getConfig('/song/url', 'get', params),
+            // 热搜列表
+            getSongHot: () => this._getConfig('/search/hot/detail', 'get'),
         };
         this.requestConfigs = configs;
     }
@@ -28,7 +30,7 @@ class SearchBizApi {
     }
 
     // 生成请求配置
-    _getConfig(url: string, method: string = 'get', params: object, config: object = {}) {
+    _getConfig(url: string, method: string = 'get', params: object = {}, config: object = {}) {
         return {
             url: `${this.preUrl}${url}`,
             method,

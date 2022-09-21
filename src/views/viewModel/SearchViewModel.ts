@@ -19,6 +19,12 @@ class SearchViewModel extends ViewModelBase {
         const result: any = await this._searchBizApi?.getSongUrl(params);
         return result?.data?.[0].url;
     }
+
+    // 热搜列表
+    async getSongHot() {
+        const result: any = await this._searchBizApi?.getSongHot();
+        return result?.result?.hots;
+    }
 }
 
 const searchViewModel = new SearchViewModel();

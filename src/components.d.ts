@@ -19,4 +19,7 @@ declare module '@vue/runtime-core' {
     TopNavItem: typeof import('./components/TopNavItem.vue')['default']
     TopSubNavItem: typeof import('./components/TopSubNavItem.vue')['default']
   }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
+  }
 }

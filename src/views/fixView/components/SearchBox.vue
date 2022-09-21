@@ -1,7 +1,7 @@
 <template>
     <div class="search-box-view">
         <SearchInput @change="change" @focus="focus" @blur="blur"></SearchInput>
-        <div class="songs-box" v-show="state.showSongsBox">
+        <div class="songs-box" v-show="state.showSongsBox" v-loading="state.loading">
             <ul>
                 <li
                     v-for="song in state.searchSongs"
@@ -25,15 +25,30 @@ import searchViewModel from '@/views/viewModel/SearchViewModel';
 const songAudio = ref<HTMLElement | null>(null);
 
 const state = reactive({
+    hotSongs: [],
     searchSongs: [],
     showSongsBox: false,
     songUrl: '',
+    loading: false,
 });
 
+onMounted(async () => {
+    // 获取热搜列表
+    state.hotSongs = await searchViewModel.getSongHot();
+    console.log('Rd ~ file: SearchBox.vue ~ line 37 ~ onMounted ~ state.hotSongs', state.hotSongs);
+});
+
+const songsList = computed(() => {
+    return state.searchSongs.length ? state.searchSongs : state.hotSongs;
+});
+
+// 关键词搜索
 const change = async (newVal: string) => {
+    state.loading = true;
     state.searchSongs = await searchViewModel.keywordSearch({
         keywords: newVal,
     });
+    state.loading = false;
 };
 
 const focus = () => {
@@ -46,6 +61,7 @@ const blur = () => {
     }, 100);
 };
 
+// 点击歌曲项获取歌曲url
 const songClick = async (songId: string) => {
     state.songUrl = await searchViewModel.getSongUrl({
         id: songId,
