@@ -1,19 +1,23 @@
 // 搜索相关API实例方法
 import ViewModelBase from '@/views/viewModel/ViewModelBase';
-import { SearchInterface } from '@/types/SearchBizApiInterface'
+import { SearchInterface, SongUrlInterface } from '@/types/SearchBizApiInterface'
 
 class SearchViewModel extends ViewModelBase {
     constructor() {
         super();
-        console.log("Rd ~ file: SearchViewModel.ts ~ line 14 ~ SearchViewModel ~ keywordSearch ~ this._searchBizApi", this._searchBizApi)
 
     }
 
     // 关键词搜索
     async keywordSearch(params: SearchInterface) {
         const result: any = await this._searchBizApi?.keywordSearch(params);
-        console.log("Rd ~ file: SearchViewModel.ts ~ line 14 ~ SearchViewModel ~ keywordSearch ~ result", result)
-        return result;
+        return result?.result?.songs;
+    }
+
+    // 获取音乐url
+    async getSongUrl(params: SongUrlInterface) {
+        const result: any = await this._searchBizApi?.getSongUrl(params);
+        return result?.data?.[0].url;
     }
 }
 

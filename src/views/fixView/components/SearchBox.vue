@@ -4,43 +4,36 @@
         <div class="songs-box" v-show="state.showSongsBox">
             <ul>
                 <li
-                    v-for="song in state.songs"
-                    :key="song.id"
+                    v-for="song in state.searchSongs"
+                    :key="song.privilege.id"
                     :title="song.name"
-                    @click="songClick(song.id)"
+                    @click="songClick(song.privilege.id)"
                 >
                     {{ song.name }}
                 </li>
             </ul>
         </div>
+        <audio controls autoplay class="audio-box" ref="songAudio">
+            <source :src="state.songUrl" />
+        </audio>
     </div>
 </template>
 
 <script setup lang="ts">
 import searchViewModel from '@/views/viewModel/SearchViewModel';
 
+const songAudio = ref<HTMLElement | null>(null);
+
 const state = reactive({
-    searchResult: {},
-    songs: [
-        { name: '武则天', id: '89351049' },
-        { name: '武则天', id: '4664' },
-        { name: '武则天', id: '124245' },
-    ],
+    searchSongs: [],
     showSongsBox: false,
+    songUrl: '',
 });
 
 const change = async (newVal: string) => {
-    console.log('Rd ~ file: SearchBox.vue ~ line 16 ~ change ~ newVal', newVal);
-    state.searchResult = await searchViewModel.keywordSearch({
+    state.searchSongs = await searchViewModel.keywordSearch({
         keywords: newVal,
     });
-    console.log(
-        'Rd ~ file: SearchBox.vue ~ line 20 ~ change ~ state.searchResult',
-        state.searchResult
-    );
-
-    // state.songs = state.searchResult?.result.songs;
-    // console.log('Rd ~ file: SearchInput.vue ~ line 28 ~ change ~ state.songs', state.songs);
 };
 
 const focus = () => {
@@ -53,8 +46,14 @@ const blur = () => {
     }, 100);
 };
 
-const songClick = (songId: string) => {
-    console.log('Rd ~ file: SearchBox.vue ~ line 52 ~ songClick ~ songId', songId);
+const songClick = async (songId: string) => {
+    state.songUrl = await searchViewModel.getSongUrl({
+        id: songId,
+    });
+
+    if (state.songUrl) {
+        songAudio.value.src = state.songUrl;
+    }
 };
 </script>
 
@@ -94,6 +93,11 @@ const songClick = (songId: string) => {
                 }
             }
         }
+    }
+    .audio-box {
+        position: absolute;
+        top: 50px;
+        left: 420px;
     }
 }
 </style>

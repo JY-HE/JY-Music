@@ -11,10 +11,7 @@ class ViewModelBase {
         // 业务请求类
         this._loginBizApi = bizService.loginBizApi;
         this._singerBizApi = bizService.singerBizApi;
-        // console.log("Rd ~ file: ViewModelBase.ts ~ line 14 ~ ViewModelBase ~ constructor ~ this._singerBizApi", this._singerBizApi)
         this._searchBizApi = bizService.searchBizApi;
-        console.log("Rd ~ file: ViewModelBase.ts ~ line 16 ~ ViewModelBase ~ constructor ~ this._searchBizApi", this._searchBizApi)
-        console.trace("Rd ~ file: ViewModelBase.ts ~ line 15 ~ ViewModelBase ~ constructor ~ this._searchBizApi")
     }
 }
 

@@ -2,13 +2,12 @@ import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const service = axios.create({
     baseURL: "https://netease-cloud-music-4xmo6vdfe-jy-he.vercel.app",
-    timeout: 1000 * 30,
+    timeout: 3000 * 30,
 });
 
 // Request interceptors
 service.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-        console.log("Rd ~ file: axios.ts ~ line 10 ~ config", config)
         // do something
         return config;
     },
@@ -20,7 +19,6 @@ service.interceptors.request.use(
 // Response interceptors
 service.interceptors.response.use(
     async (response: AxiosResponse) => {
-        console.log("Rd ~ file: axios.ts ~ line 21 ~ response", response)
         // do something
         return response.data
     },

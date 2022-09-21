@@ -36,10 +36,8 @@ class BizService implements BizApiService {
         this.loginBizApi = apiInitializer.loginBizApi;
         // 歌手相关
         this.singerBizApi = apiInitializer.singerBizApi;
-        console.log("Rd ~ file: index.ts ~ line 37 ~ BizService ~ setBizModule ~ this.singerBizApi", this.singerBizApi)
         // 搜索相关
         this.searchBizApi = apiInitializer.searchBizApi;
-        console.log("Rd ~ file: index.ts ~ line 40 ~ BizService ~ setBizModule ~ this.searchBizApi", this.searchBizApi)
     }
 }
 

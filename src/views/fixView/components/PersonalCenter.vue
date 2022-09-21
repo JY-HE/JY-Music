@@ -33,6 +33,7 @@ const state = reactive<{
     showSelectBox: false,
 });
 
+console.log('Rd ~ file: PersonalCenter.vue ~ line 37 ~ initStore.config', initStore.config);
 state.config = initStore.config;
 state.color = `rgb(${state.config?.defaultTheme['theme-color']})`;
 

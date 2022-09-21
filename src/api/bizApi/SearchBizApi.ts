@@ -1,5 +1,5 @@
 // 搜索相关api配置
-import { SearchInterface, SearchRequestConfigsInterface } from '@/types/SearchBizApiInterface'
+import { SearchInterface, SongUrlInterface, SearchRequestConfigsInterface } from '@/types/SearchBizApiInterface'
 
 class SearchBizApi {
     // 定义属性
@@ -16,7 +16,8 @@ class SearchBizApi {
         const configs: SearchRequestConfigsInterface = {
             // 关键词搜索
             keywordSearch: (params: SearchInterface) => this._getConfig('/cloudsearch', 'get', params),
-
+            // 获取歌曲url播放地址
+            getSongUrl: (params: SongUrlInterface) => this._getConfig('/song/url', 'get', params),
         };
         this.requestConfigs = configs;
     }
