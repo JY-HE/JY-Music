@@ -20,9 +20,11 @@ class BizService implements BizApiService {
     * @param {string} token 用户token
     * @param {Object} config config.json配置
     */
-    async init() {
+    init() {
+        console.log("Rd ~ file: index.ts ~ line 24 ~ BizService ~ init ~ init")
+
         // 业务api初始化，构建各个业务api
-        await apiInitializer.init({ token: '', config: {} });
+        apiInitializer.init({ token: '', config: {} });
 
         // 业务库biz模块挂载
         this.setBizModule()
@@ -34,8 +36,10 @@ class BizService implements BizApiService {
         this.loginBizApi = apiInitializer.loginBizApi;
         // 歌手相关
         this.singerBizApi = apiInitializer.singerBizApi;
+        console.log("Rd ~ file: index.ts ~ line 37 ~ BizService ~ setBizModule ~ this.singerBizApi", this.singerBizApi)
         // 搜索相关
         this.searchBizApi = apiInitializer.searchBizApi;
+        console.log("Rd ~ file: index.ts ~ line 40 ~ BizService ~ setBizModule ~ this.searchBizApi", this.searchBizApi)
     }
 }
 

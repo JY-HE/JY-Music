@@ -7,7 +7,8 @@ class SearchBizApi {
     requestConfigs: SearchRequestConfigsInterface | undefined
 
     constructor() {
-        this.preUrl = '/cloud/api';
+        // this.preUrl = '/api';
+        this.preUrl = '';
         this.initRequestConfigs();
     }
 

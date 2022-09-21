@@ -7,14 +7,15 @@ class SingerBizApi {
     requestConfigs: SingerRequestConfigsInterface | undefined
 
     constructor() {
-        this.preUrl = '/cloud/api';
+        // this.preUrl = '/api';
+        this.preUrl = '';
         this.initRequestConfigs();
     }
 
     initRequestConfigs() {
         const configs: SingerRequestConfigsInterface = {
             // 获取歌手分类列表
-            getSingerCategory: (params: SingerCategoryInterface) => this._getConfig('/artist/list/', 'get', params),
+            getSingerCategory: (params: SingerCategoryInterface) => this._getConfig('/artist/list', 'get', params),
 
         };
         this.requestConfigs = configs;

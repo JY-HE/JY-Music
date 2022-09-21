@@ -26,7 +26,7 @@ class ApiInitializer {
 
 
     // 初始化，设置axios请求头，将内置的请求配置转为请求方法
-    async init({ token = '', config = {} }: { token: string, config: AxiosRequestConfig<any> }) {
+    init({ token = '', config = {} }: { token: string, config: AxiosRequestConfig<any> }) {
         this.loginBizApi = this.decoratorApi(loginBizApi.requestConfigs);
         this.singerBizApi = this.decoratorApi(singerBizApi.requestConfigs);
         this.searchBizApi = this.decoratorApi(searchBizApi.requestConfigs);

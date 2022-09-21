@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 const service = axios.create({
+    baseURL: "https://netease-cloud-music-4xmo6vdfe-jy-he.vercel.app",
     timeout: 1000 * 30,
 });
 
