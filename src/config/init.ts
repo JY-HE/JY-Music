@@ -1,11 +1,10 @@
 // 配置初始化
 
-import AppConfig from './AppConfig';
+import appConfig from './AppConfig';
 import theme from '@/utils/theme';
 import { InitStore } from '@/store/initStore';
 
 const init = async () => {
-    const appConfig = new AppConfig();
     await appConfig.init();
     const { config } = appConfig;
 

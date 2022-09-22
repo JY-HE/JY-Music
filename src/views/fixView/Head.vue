@@ -1,10 +1,10 @@
 <template>
     <div class="head-view">
         <div class="head-view-top">
-            <Logo></Logo>
+            <Logo :titleName="config.title"></Logo>
             <TopNav></TopNav>
             <SearchBox></SearchBox>
-            <PersonalCenter></PersonalCenter>
+            <PersonalCenter :initStore="initStore"></PersonalCenter>
         </div>
         <div class="head-view-bottom">
             <TopSubNav></TopSubNav>
@@ -13,10 +13,17 @@
 </template>
 
 <script lang="ts" setup>
+import { InitStore } from '@/store/initStore';
 import TopNav from './components/TopNav.vue';
 import TopSubNav from './components/TopSubNav.vue';
 import PersonalCenter from './components/PersonalCenter.vue';
 import SearchBox from './components/SearchBox.vue';
+
+const initStore = InitStore();
+
+const config = computed(() => {
+    return initStore.config;
+});
 </script>
 <style lang="scss">
 .head-view {

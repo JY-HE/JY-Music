@@ -21,8 +21,6 @@ class BizService implements BizApiService {
     * @param {Object} config config.json配置
     */
     init() {
-        console.log("Rd ~ file: index.ts ~ line 24 ~ BizService ~ init ~ init")
-
         // 业务api初始化，构建各个业务api
         apiInitializer.init({ token: '', config: {} });
 

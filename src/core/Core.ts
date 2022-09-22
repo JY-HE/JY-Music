@@ -14,6 +14,7 @@ class Core {
         // 初始化业务层
         bizService.init()
 
+
         // 懒加载
         const App = (await import('@/App.vue')).default
 

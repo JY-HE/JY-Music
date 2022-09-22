@@ -1,11 +1,15 @@
 <template>
     <div class="music-logo">
         <img src="../assets/imgs/logo.png" alt="" />
-        <h1>JY音乐</h1>
+        <h1>{{ titleName }}</h1>
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+    titleName: { type: String, default: '' },
+});
+</script>
 
 <style lang="scss">
 .music-logo {

@@ -20,28 +20,33 @@
 
 <script setup lang="ts">
 import theme from '@/utils/theme';
-import { InitStore } from '@/store/initStore';
 
-const initStore = InitStore();
+const props = defineProps({
+    initStore: { type: Object, default: () => ({}) },
+});
+
 const state = reactive<{
-    config: any;
     color: string;
     showSelectBox: Boolean;
 }>({
-    config: {},
     color: '',
     showSelectBox: false,
 });
 
-console.log('Rd ~ file: PersonalCenter.vue ~ line 37 ~ initStore.config', initStore.config);
-state.config = initStore.config;
-state.color = `rgb(${state.config?.defaultTheme['theme-color']})`;
+const config = computed(() => {
+    return props.initStore.config;
+});
+
+// 获取主题色
+state.color = `rgb(${config.value?.defaultTheme['theme-color']})`;
 
 const colorPicker = (newColor: string) => {
+    // 提取数字
     const colorNumber = newColor.match(/(?<=\().*(?=\))/g);
+    // 设置主题色
     theme.setThemeColor(colorNumber[0]);
     // 更改 pinia 中的配置项 theme-color
-    initStore.setConfiguration('defaultTheme', 'theme-color', colorNumber[0]);
+    props.initStore.setConfiguration('defaultTheme', 'theme-color', colorNumber[0]);
     // 解决取色板关闭时的BUG
     setTimeout(() => {
         state.showSelectBox = false;

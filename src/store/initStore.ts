@@ -8,6 +8,18 @@ export const InitStore = defineStore({
             searchSongs: ref<Array<object>>([])  // 搜索到的歌曲
         }
     },
+    // 开启数据缓存
+    persist: {
+        enabled: true,
+        // 可以指定缓存的字段和方式
+        // strategies: [
+        //     {
+        //       storage: localStorage,
+        //       paths: ['name', 'age']
+        //     }
+        //   ]
+    },
+
     actions: {
         setConfig(payload: object) {
             this.config = payload

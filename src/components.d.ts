@@ -10,7 +10,6 @@ declare module '@vue/runtime-core' {
     DetailModule: typeof import('./components/DetailModule.vue')['default']
     ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
     ElInput: typeof import('element-plus/es')['ElInput']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Logo: typeof import('./components/Logo.vue')['default']
     Request: typeof import('./components/Request.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
