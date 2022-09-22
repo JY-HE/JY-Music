@@ -1,0 +1,29 @@
+// 轮播图样式
+.el-carousel {
+    .el-carousel__container {
+        .el-carousel__arrow {
+            border-radius: 0;
+            i {
+                @include whrem(48);
+
+                svg {
+                    @include wh;
+                }
+            }
+        }
+        .el-carousel__arrow--left {
+            left: 0;
+            @include whrem(60, 90);
+        }
+        .el-carousel__arrow--right {
+            right: 0;
+            @include whrem(60, 90);
+        }
+    }
+    .el-carousel__indicators--outside {
+        button {
+            @include whrem(12);
+            border-radius: 50%;
+        }
+    }
+}

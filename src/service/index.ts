@@ -1,6 +1,7 @@
 import { apiInitializer } from '@/api/init';
 import { SingerRequestMethodsInterface } from '@/types/SingerBizApiInterface'
 import { SearchRequestMethodsInterface } from '@/types/SearchBizApiInterface'
+import { SongsRequestMethodsInterface } from '@/types/SongsBizApiInterface'
 
 interface BizApiService {
     init: () => (void)
@@ -8,12 +9,14 @@ interface BizApiService {
     loginBizApi: any
     singerBizApi: SingerRequestMethodsInterface | undefined
     searchBizApi: SearchRequestMethodsInterface | undefined
+    songsBizApi: SongsRequestMethodsInterface | undefined
 }
 
 class BizService implements BizApiService {
     loginBizApi: any
     singerBizApi: SingerRequestMethodsInterface | undefined
     searchBizApi: SearchRequestMethodsInterface | undefined
+    songsBizApi: SongsRequestMethodsInterface | undefined
 
     /**
     * 初始化服务层
@@ -36,6 +39,8 @@ class BizService implements BizApiService {
         this.singerBizApi = apiInitializer.singerBizApi;
         // 搜索相关
         this.searchBizApi = apiInitializer.searchBizApi;
+        // 歌单、歌曲相关
+        this.songsBizApi = apiInitializer.songsBizApi;
     }
 }
 

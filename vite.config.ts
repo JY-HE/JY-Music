@@ -60,6 +60,7 @@ export default defineConfig({
           @import '@/assets/scss/main.scss';
           @import '@/assets/scss/theme.scss';
           @import 'jy-web-style/src/index.scss';
+          @import '@/assets/scss/style.scss';
          `,
       },
     },

@@ -4,8 +4,10 @@ import axios from './axios';
 import loginBizApi from './bizApi/LoginBizApi';
 import singerBizApi from './bizApi/SingerBizApi';
 import searchBizApi from './bizApi/SearchBizApi';
+import songsBizApi from './bizApi/SongsBizApi';
 import { SingerRequestMethodsInterface } from '@/types/SingerBizApiInterface'
 import { SearchRequestMethodsInterface } from '@/types/SearchBizApiInterface'
+import { SongsRequestMethodsInterface } from '@/types/SongsBizApiInterface'
 import type { AxiosRequestConfig, AxiosInstance } from "axios"
 
 
@@ -15,6 +17,7 @@ class ApiInitializer {
     loginBizApi: any
     singerBizApi: SingerRequestMethodsInterface | undefined
     searchBizApi: SearchRequestMethodsInterface | undefined
+    songsBizApi: SongsRequestMethodsInterface | undefined
 
     constructor() {
         this._ApiModules = [
@@ -30,6 +33,7 @@ class ApiInitializer {
         this.loginBizApi = this.decoratorApi(loginBizApi.requestConfigs);
         this.singerBizApi = this.decoratorApi(singerBizApi.requestConfigs);
         this.searchBizApi = this.decoratorApi(searchBizApi.requestConfigs);
+        this.songsBizApi = this.decoratorApi(songsBizApi.requestConfigs);
     }
 
     // 初始化api，将api的config转为request
