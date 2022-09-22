@@ -5,7 +5,9 @@ export const InitStore = defineStore({
     state: () => {
         return {
             config: ref<any>(null), // 配置项
-            searchSongs: ref<Array<object>>([])  // 搜索到的歌曲
+            searchSongs: ref<Array<object>>([]),  // 搜索到的歌曲
+            songListDetail: ref<object>({}),  // 歌单详情
+            songList: ref<Array<object>>([])  // 歌单中的歌曲
         }
     },
     // 开启数据缓存
@@ -30,6 +32,12 @@ export const InitStore = defineStore({
         // 更改config中某一配置项的值
         setConfiguration(configName: string, configuration: string = '', payload: any) {
             this.config[configName][configuration] = payload
+        },
+        setSongListDetail(payload: object) {
+            this.songListDetail = payload
+        },
+        setSongList(payload: Array<object>) {
+            this.songList = payload
         }
     }
 })

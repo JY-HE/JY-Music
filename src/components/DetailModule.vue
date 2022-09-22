@@ -21,7 +21,7 @@
                         v-for="item in list"
                         :key="item.id"
                         class="carousel-item-box"
-                        @click="listItemClick(item)"
+                        @click="listItemClick(item.id)"
                     >
                         <div class="carousel-item-img">
                             <img :src="item.picUrl" alt="" v-if="item.picUrl" />
@@ -39,6 +39,10 @@
 </template>
 
 <script setup lang="ts">
+import SongsViewModel from '@/views/viewModel/SongsViewModel';
+import { InitStore } from '@/store/initStore';
+import { useRouter } from 'vue-router';
+
 const props = defineProps({
     moduleTitle: { type: String, default: '歌单推荐' },
     moduleNavList: {
@@ -58,6 +62,10 @@ const props = defineProps({
         default: () => [],
     },
 });
+
+const initStore = InitStore();
+const router = useRouter();
+
 const state = reactive({
     currentIndex: 0,
     newPlayList: [],
@@ -91,8 +99,23 @@ const handlerPlayList = (num: number, arr: Array<any>) => {
 };
 
 // 歌单点击
-const listItemClick = (item: object) => {
-    console.log('Rd ~ file: DetailModule.vue ~ line 91 ~ listItemClick ~ item', item);
+const listItemClick = async (itemId: string) => {
+    router.push({ path: '/playList', query: { id: `${itemId}` } });
+
+    // // 获取歌单详情
+    // const songListDetail = await SongsViewModel.getPlaylistDetail({
+    //     id: itemId,
+    // });
+    // // 将歌单详情存入pinia
+    // initStore.setSongListDetail(songListDetail);
+    // // 获取歌单前10首歌曲
+    // const allSongs = await SongsViewModel.getPlaylistAll({
+    //     id: itemId,
+    //     limit: 10,
+    //     offset: 0,
+    // });
+    // // 将歌曲存入pinia
+    // initStore.setSongList(allSongs);
 };
 </script>
 
