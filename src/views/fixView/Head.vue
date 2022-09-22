@@ -1,7 +1,7 @@
 <template>
     <div class="head-view">
         <div class="head-view-top">
-            <Logo :titleName="config.title"></Logo>
+            <Logo :titleName="config.title || ''"></Logo>
             <TopNav></TopNav>
             <SearchBox></SearchBox>
             <PersonalCenter :initStore="initStore"></PersonalCenter>
@@ -19,7 +19,7 @@ import TopSubNav from './components/TopSubNav.vue';
 import PersonalCenter from './components/PersonalCenter.vue';
 import SearchBox from './components/SearchBox.vue';
 
-const initStore = InitStore();
+const initStore: any = InitStore();
 
 const config = computed(() => {
     return initStore.config;

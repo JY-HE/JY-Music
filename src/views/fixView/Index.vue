@@ -16,10 +16,6 @@ onMounted(async () => {
     state.recPlaylist = await SongsViewModel.getRecPlaylist({
         limit: 15,
     });
-    console.log(
-        'Rd ~ file: Index.vue ~ line 21 ~ onMounted ~  state.recPlaylist',
-        state.recPlaylist
-    );
 });
 </script>
 

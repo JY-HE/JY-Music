@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import searchViewModel from '@/views/viewModel/SearchViewModel';
 
-const songAudio = ref<HTMLElement | null>(null);
+const songAudio = ref<InstanceType<typeof Audio>>();
 
 const state = reactive({
     hotSongs: [],
