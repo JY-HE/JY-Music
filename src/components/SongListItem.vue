@@ -2,28 +2,40 @@
     <div :class="['songs-list-item', isHead && 'songs-list-item-head']">
         <p class="songs-list-item-index">{{ index >= 0 ? index : '' }}</p>
         <p class="songs-list-item-songName" :title="songName">
-            <span>{{ songName }}</span>
-            <img src="../assets/imgs/play.png" alt="" title="播放" />
+            <span>{{ isHead ? '歌曲' : songName }}</span>
+            <img
+                src="../assets/imgs/play.png"
+                alt=""
+                title="播放"
+                @click="emit('play', songInfo.id)"
+            />
         </p>
         <p class="songs-list-item-songUser">
             <span v-if="isHead">歌手</span>
             <span v-else v-for="user in songUsers" :key="user.id">{{ user.name }}</span>
         </p>
-        <p class="songs-list-item-songAlbum" :title="songAlbum">{{ songAlbum }}</p>
+        <p class="songs-list-item-songAlbum" :title="songAlbum.name">
+            {{ isHead ? '专辑' : songAlbum.name }}
+        </p>
         <p class="songs-list-item-songTime">{{ isHead ? '时长' : formatTime(songTime) }}</p>
     </div>
 </template>
 
 <script setup lang="ts">
 import { formatTime } from '@/utils/function';
-defineProps({
+const props = defineProps({
     index: { type: Number, default: -1 },
-    songName: { type: String, default: '歌曲' },
-    songUsers: { type: Array, default: () => [] },
-    songAlbum: { type: String, default: '专辑' },
-    songTime: { type: Number, default: 0 },
+    songInfo: { type: Object, default: () => ({}) },
     isHead: { type: Boolean, default: false },
 });
+const emit = defineEmits(['play']);
+
+const {
+    name: songName = '',
+    al: songAlbum = '',
+    ar: songUsers = [],
+    dt: songTime = 0,
+} = props.songInfo;
 </script>
 
 <style lang="scss">

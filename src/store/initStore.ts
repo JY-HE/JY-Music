@@ -7,7 +7,8 @@ export const InitStore = defineStore({
             config: ref<any>(null), // 配置项
             searchSongs: ref<Array<object>>([]),  // 搜索到的歌曲
             songListDetail: ref<object>({}),  // 歌单详情
-            songList: ref<Array<object>>([])  // 歌单中的歌曲
+            songList: ref<Array<object>>([]),  // 歌单中的歌曲
+            playSongUrl: ref<string>('') // 当前播放歌曲的 url
         }
     },
     // 开启数据缓存
@@ -38,6 +39,9 @@ export const InitStore = defineStore({
         },
         setSongList(payload: Array<object>) {
             this.songList = payload
+        },
+        setPlaySongUrl(payload: string) {
+            this.playSongUrl = payload
         }
     }
 })

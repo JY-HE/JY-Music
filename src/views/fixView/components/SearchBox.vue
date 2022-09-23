@@ -22,6 +22,10 @@
 <script setup lang="ts">
 import searchViewModel from '@/views/viewModel/SearchViewModel';
 
+const props = defineProps({
+    playSongUrl: { type: String, default: '' },
+});
+
 const songAudio = ref<InstanceType<typeof Audio>>();
 
 const state = reactive({
@@ -37,6 +41,14 @@ onMounted(async () => {
     state.hotSongs = await searchViewModel.getSongHot();
     console.log('Rd ~ file: SearchBox.vue ~ line 37 ~ onMounted ~ state.hotSongs', state.hotSongs);
 });
+
+watch(
+    () => props.playSongUrl,
+    newVal => {
+        console.log('Rd ~ file: SearchBox.vue ~ line 48 ~ newVal', newVal);
+        songAudio.value.src = newVal;
+    }
+);
 
 const songsList = computed(() => {
     return state.searchSongs.length ? state.searchSongs : state.hotSongs;

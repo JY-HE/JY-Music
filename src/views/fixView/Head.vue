@@ -3,7 +3,7 @@
         <div class="head-view-top">
             <Logo :titleName="config.title || ''"></Logo>
             <TopNav></TopNav>
-            <SearchBox></SearchBox>
+            <SearchBox :playSongUrl="initStore.playSongUrl"></SearchBox>
             <PersonalCenter :initStore="initStore"></PersonalCenter>
         </div>
         <div class="head-view-bottom">

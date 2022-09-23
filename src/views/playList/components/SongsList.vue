@@ -5,19 +5,31 @@
             v-for="(song, index) in allSongs"
             :key="song.id"
             :index="index + 1"
-            :songName="song.name"
-            :songAlbum="song.al.name"
-            :songUsers="song.ar"
-            :songTime="song.dt"
+            :songInfo="song"
+            @play="playSong"
         >
         </SongListItem>
     </div>
 </template>
 
 <script setup lang="ts">
+import searchViewModel from '@/views/viewModel/SearchViewModel';
+import { InitStore } from '@/store/initStore';
+
 defineProps({
     allSongs: { type: Array, default: () => [] },
 });
+
+const initStore: any = InitStore();
+
+// 播放歌曲
+const playSong = async (songId: string) => {
+    // 获取歌曲 url
+    let songUrl = await searchViewModel.getSongUrl({
+        id: songId,
+    });
+    initStore.setPlaySongUrl(songUrl);
+};
 </script>
 
 <style lang="scss">
