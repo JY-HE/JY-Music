@@ -5,6 +5,12 @@
         </div>
         <div class="play-list-songs">
             <SongsList :allSongs="state.allSongs"></SongsList>
+            <div class="play-list-description">
+                <span>简介<br /></span>
+                <div class="desc">
+                    {{ state.songListDetail.description }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -63,11 +69,34 @@ const getAllSongs = async () => {
 
     .play-list-info {
         @include whrem(1200, 270);
+        margin-bottom: pxToRem(32);
     }
 
     .play-list-songs {
-        @include whrem(1200, 100);
-        background: red;
+        @include whrem(1200, 700);
+        @include flexCenter(flex-start, flex-start);
+
+        .songs-list-view {
+            @include whrem(888, 50);
+        }
+
+        .play-list-description {
+            flex: 1;
+            height: auto;
+            margin-left: pxToRem(32);
+
+            span {
+                font-weight: 600;
+            }
+
+            .desc {
+                width: 100%;
+                height: auto;
+                text-align: justify;
+                text-justify: distribute-all-lines; // 这行必加，兼容ie浏览器
+                // text-align-last: justify; // 最后一行也是两端对齐
+            }
+        }
     }
 }
 </style>
