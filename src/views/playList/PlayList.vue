@@ -21,11 +21,12 @@ import { useRoute } from 'vue-router';
 import { InitStore } from '@/store/initStore';
 import ListInfo from './components/ListInfo.vue';
 import SongsList from './components/SongsList.vue';
+import { PlayListState } from './types/init';
 
 const router = useRoute();
 const initStore: any = InitStore();
 
-const state = reactive({
+const state = reactive<PlayListState>({
     songListId: '',
     songListDetail: {},
     allSongs: [],

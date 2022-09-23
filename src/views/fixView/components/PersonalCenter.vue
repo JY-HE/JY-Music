@@ -44,9 +44,9 @@ const colorPicker = (newColor: string) => {
     // 提取数字
     const colorNumber = newColor.match(/(?<=\().*(?=\))/g);
     // 设置主题色
-    theme.setThemeColor(colorNumber[0]);
+    theme.setThemeColor(colorNumber![0]); // ! 是 not null 的断言操作符，不执行运行时检查
     // 更改 pinia 中的配置项 theme-color
-    props.initStore.setConfiguration('defaultTheme', 'theme-color', colorNumber[0]);
+    props.initStore.setConfiguration('defaultTheme', 'theme-color', colorNumber![0]);
     // 解决取色板关闭时的BUG
     setTimeout(() => {
         state.showSelectBox = false;

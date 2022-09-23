@@ -21,14 +21,15 @@
 
 <script setup lang="ts">
 import searchViewModel from '@/views/viewModel/SearchViewModel';
+import { SearchBoxState } from '../types/init';
 
 const props = defineProps({
     playSongUrl: { type: String, default: '' },
 });
 
-const songAudio = ref<InstanceType<typeof Audio>>();
+const songAudio = ref<HTMLAudioElement>();
 
-const state = reactive({
+const state = reactive<SearchBoxState>({
     hotSongs: [],
     searchSongs: [],
     showSongsBox: false,
@@ -46,7 +47,8 @@ watch(
     () => props.playSongUrl,
     newVal => {
         console.log('Rd ~ file: SearchBox.vue ~ line 48 ~ newVal', newVal);
-        songAudio.value.src = newVal;
+        // ! 是 not null 的断言操作符，不执行运行时检查
+        songAudio.value!.src = newVal;
     }
 );
 
@@ -80,7 +82,7 @@ const songClick = async (songId: string) => {
     });
 
     if (state.songUrl) {
-        songAudio.value.src = state.songUrl;
+        songAudio.value!.src = state.songUrl;
     }
 };
 </script>
