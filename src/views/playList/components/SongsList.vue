@@ -2,7 +2,7 @@
     <div class="songs-list-view">
         <SongListItem isHead> </SongListItem>
         <SongListItem
-            v-for="(song, index) in allSongs"
+            v-for="(song, index) in (allSongs as Array<any>)"
             :key="song.id"
             :index="index + 1"
             :songInfo="song"

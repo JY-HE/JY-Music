@@ -1,7 +1,7 @@
 <template>
     <div class="head-view">
         <div class="head-view-top">
-            <Logo :titleName="config.title || ''"></Logo>
+            <Logo :titleName="title"></Logo>
             <TopNav></TopNav>
             <SearchBox :playSongUrl="initStore.playSongUrl"></SearchBox>
             <PersonalCenter :initStore="initStore"></PersonalCenter>
@@ -21,10 +21,11 @@ import SearchBox from './components/SearchBox.vue';
 
 const initStore: any = InitStore();
 
-const config = computed(() => {
-    return initStore.config;
+const title = computed(() => {
+    return initStore.config?.title || '';
 });
 </script>
+
 <style lang="scss">
 .head-view {
     @include whrem(100%, 142);
