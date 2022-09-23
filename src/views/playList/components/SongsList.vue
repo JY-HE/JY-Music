@@ -35,5 +35,9 @@ const playSong = async (songId: string) => {
 <style lang="scss">
 .songs-list-view {
     @include wh;
+
+    .songs-list-item:nth-child(even) {
+        background: rgba(var(--theme-color), 0.05);
+    }
 }
 </style>

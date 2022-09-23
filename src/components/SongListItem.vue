@@ -63,9 +63,9 @@ const {
         @include cursor;
         @include flexCenter;
         padding-right: pxToRem(16);
-        color: rgb(153, 151, 151);
 
         @include hover {
+            color: rgba(var(--theme-color), 1);
             img {
                 display: block;
             }
@@ -104,6 +104,8 @@ const {
     .songs-list-item-songName {
         cursor: default;
         @include hover {
+            color: rgb(153, 151, 151);
+
             img {
                 display: none;
             }

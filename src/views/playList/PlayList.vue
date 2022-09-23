@@ -66,7 +66,6 @@ const getAllSongs = async () => {
 .play-list-view {
     @include wh;
     @include flexCenter(false, center, true);
-    background: rgb(248, 247, 247);
 
     .play-list-info {
         @include whrem(1200, 270);
