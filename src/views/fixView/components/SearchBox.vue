@@ -13,9 +13,6 @@
                 </li>
             </ul>
         </div>
-        <audio controls autoplay class="audio-box" ref="songAudio">
-            <source :src="state.songUrl" />
-        </audio>
     </div>
 </template>
 
@@ -43,15 +40,6 @@ onMounted(async () => {
     console.log('Rd ~ file: SearchBox.vue ~ line 37 ~ onMounted ~ state.hotSongs', state.hotSongs);
 });
 
-watch(
-    () => props.playSongUrl,
-    newVal => {
-        console.log('Rd ~ file: SearchBox.vue ~ line 48 ~ newVal', newVal);
-        // ! 是 not null 的断言操作符，不执行运行时检查
-        songAudio.value!.src = newVal;
-    }
-);
-
 const songsList = computed(() => {
     return state.searchSongs.length ? state.searchSongs : state.hotSongs;
 });
@@ -75,15 +63,9 @@ const blur = () => {
     }, 100);
 };
 
-// 点击歌曲项获取歌曲url
+// 点击进入详情页
 const songClick = async (songId: string) => {
-    state.songUrl = await searchViewModel.getSongUrl({
-        id: songId,
-    });
-
-    if (state.songUrl) {
-        songAudio.value!.src = state.songUrl;
-    }
+    console.log('Rd ~ file: SearchBox.vue ~ line 68 ~ songClick ~ songId', songId);
 };
 </script>
 

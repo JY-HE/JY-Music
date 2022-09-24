@@ -6,8 +6,17 @@
             :key="song.id"
             :index="index + 1"
             :songInfo="song"
-            @play="playSong"
         >
+            <template v-slot:song-name-button>
+                <slot name="name-button" :rowData="song">
+                    <img
+                        src="../../../assets/imgs/play.png"
+                        alt=""
+                        title="播放"
+                        @click="playSong(song.id)"
+                    />
+                </slot>
+            </template>
         </SongListItem>
     </div>
 </template>
@@ -15,13 +24,14 @@
 <script setup lang="ts">
 import searchViewModel from '@/views/viewModel/SearchViewModel';
 import { InitStore } from '@/store/initStore';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute, LocationQueryValue } from 'vue-router';
 
 defineProps({
     allSongs: { type: Array, default: () => [] },
 });
 
 const router = useRouter();
+const route = useRoute();
 const initStore: any = InitStore();
 
 // 播放歌曲
@@ -32,16 +42,16 @@ const playSong = async (songId: string) => {
     });
     initStore.setPlaySongUrl(songUrl);
 
-    routerJump();
+    routerJump(route.query.id);
 };
 
 // 跳转播放页
-const routerJump = (type?: string) => {
+const routerJump = (playListId: LocationQueryValue | LocationQueryValue[]) => {
     // resolve新窗口打开
     const newPage = router.resolve({
         path: '/player',
         query: {
-            type: type,
+            id: playListId,
         },
     });
     window.open(newPage.href, '_blank'); // 打开新的窗口(跳转路径，跳转类型)

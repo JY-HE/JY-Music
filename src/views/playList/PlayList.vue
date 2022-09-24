@@ -23,7 +23,7 @@ import ListInfo from './components/ListInfo.vue';
 import SongsList from './components/SongsList.vue';
 import { PlayListState } from './types/init';
 
-const router = useRoute();
+const route = useRoute();
 const initStore: any = InitStore();
 
 const state = reactive<PlayListState>({
@@ -33,7 +33,7 @@ const state = reactive<PlayListState>({
 });
 
 // 获取路由参数
-state.songListId = router.query.id || '';
+state.songListId = route.query.id || '';
 
 onMounted(() => {
     getSongListDetail();

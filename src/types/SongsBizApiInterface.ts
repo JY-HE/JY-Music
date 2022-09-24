@@ -9,13 +9,13 @@ export interface recPlaylistInterface {
 
 // 获取歌单详情接口
 export interface playlistDetailInterface {
-    id: string | LocationQueryValue[] // 歌单id
+    id: LocationQueryValue | LocationQueryValue[] // 歌单id
     s?: number  // 歌单最近的 s 个收藏者,默认为 8
 }
 
 // 获取歌单所有歌曲接口
 export interface playlistAllInterface {
-    id: string | LocationQueryValue[] // 歌单id
+    id: LocationQueryValue | LocationQueryValue[] // 歌单id
     limit?: number  // 限制获取歌曲的数量，默认值为当前歌单的歌曲数量
     offset?: number // 默认值为0
 }

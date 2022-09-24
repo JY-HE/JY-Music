@@ -3,16 +3,13 @@
         <p class="songs-list-item-index">{{ index >= 0 ? index : '' }}</p>
         <p class="songs-list-item-songName" :title="songName">
             <span>{{ isHead ? '歌曲' : songName }}</span>
-            <img
-                src="../assets/imgs/play.png"
-                alt=""
-                title="播放"
-                @click="emit('play', songInfo.id)"
-            />
+        <div class="slot-button">
+            <slot name="song-name-button"></slot>
+        </div>
         </p>
         <p class="songs-list-item-songUser">
             <span v-if="isHead">歌手</span>
-            <span v-else v-for="user in songUsers" :key="user.id">{{ user.name }}</span>
+            <span v-else v-for="user in songUsers" :key="user.id">{{ user.name }}&nbsp;&nbsp;</span>
         </p>
         <p class="songs-list-item-songAlbum" :title="songAlbum.name">
             {{ isHead ? '专辑' : songAlbum.name }}
@@ -28,8 +25,6 @@ const props = defineProps({
     songInfo: { type: Object, default: () => ({}) },
     isHead: { type: Boolean, default: false },
 });
-const emit = defineEmits(['play']);
-
 const {
     name: songName = '',
     al: songAlbum = '',
@@ -66,18 +61,27 @@ const {
 
         @include hover {
             color: rgba(var(--theme-color), 1);
-            img {
-                display: block;
+
+            .slot-button {
+                @include flexCenter;
             }
+
         }
+
         span {
             flex: 1;
             @include textEllipsis;
         }
 
-        img {
+        .slot-button {
             display: none;
-            @include whrem(32);
+            width: fit-content;
+            height: 100%;
+
+            img {
+                margin: 0 pxToRem(8);
+                @include whrem(32);
+            }
         }
     }
 
@@ -99,10 +103,13 @@ const {
         color: rgb(153, 151, 151);
     }
 }
+
 .songs-list-item-head {
     color: rgb(153, 151, 151);
+
     .songs-list-item-songName {
         cursor: default;
+
         @include hover {
             color: rgb(153, 151, 151);
 
@@ -111,9 +118,11 @@ const {
             }
         }
     }
+
     .songs-list-item-songUser,
     .songs-list-item-songAlbum {
         cursor: default;
+
         &:hover {
             color: rgb(153, 151, 151);
         }
