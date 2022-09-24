@@ -6,7 +6,7 @@
         <div class="detail-module-nav">
             <router-link
                 :to="item.link"
-                v-for="(item, index) in moduleNavList"
+                v-for="(item, index) in (moduleNavList as Array<any>)"
                 :key="index"
                 :class="['nav-item', state.currentIndex === index && 'active']"
                 @click="navClick(index)"
@@ -39,9 +39,10 @@
 </template>
 
 <script setup lang="ts">
-import SongsViewModel from '@/views/viewModel/SongsViewModel';
 import { InitStore } from '@/store/initStore';
 import { useRouter } from 'vue-router';
+import { handlerPlayList } from '@/utils/function';
+import { DetailModuleState } from '@/types/CommonInterface';
 
 const props = defineProps({
     moduleTitle: { type: String, default: '歌单推荐' },
@@ -66,7 +67,7 @@ const props = defineProps({
 const initStore = InitStore();
 const router = useRouter();
 
-const state = reactive({
+const state = reactive<DetailModuleState>({
     currentIndex: 0,
     newPlayList: [],
 });
@@ -90,16 +91,8 @@ const navClick = (index: number) => {
     state.currentIndex = index;
 };
 
-const handlerPlayList = (num: number, arr: Array<any>) => {
-    const newArr = [];
-    while (arr.length > 0) {
-        newArr.push(arr.splice(0, num));
-    }
-    return newArr;
-};
-
 // 歌单点击
-const listItemClick = async (itemId: string) => {
+const listItemClick = (itemId: string) => {
     router.push({ path: '/playList', query: { id: `${itemId}` } });
 };
 </script>
