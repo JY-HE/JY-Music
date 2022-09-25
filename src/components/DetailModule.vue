@@ -30,7 +30,9 @@
                         <div class="carousel-item-name">
                             {{ item.name }}
                         </div>
-                        <div class="carousel-item-playCount">播放量：{{ item.playCount }}</div>
+                        <div class="carousel-item-playCount">
+                            播放量：{{ tranNumber(item.playCount, 2) }}
+                        </div>
                     </div>
                 </el-carousel-item>
             </el-carousel>
@@ -39,6 +41,7 @@
 </template>
 
 <script setup lang="ts">
+import { tranNumber } from '@/utils/function';
 import { InitStore } from '@/store/initStore';
 import { useRouter } from 'vue-router';
 import { handlerPlayList } from '@/utils/function';

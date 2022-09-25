@@ -13,9 +13,11 @@
                     标签：
                     <span v-for="tag in songListDetail.tags">{{ tag }}&nbsp;&nbsp;</span>
                 </div>
-                <div class="list-info-msg-playCount">播放量：{{ songListDetail.playCount }}</div>
+                <div class="list-info-msg-playCount">
+                    播放量：{{ tranNumber(songListDetail.playCount, 2) }}
+                </div>
                 <div class="list-info-msg-subscribedCount">
-                    收藏量：{{ songListDetail.subscribedCount }}
+                    收藏量：{{ tranNumber(songListDetail.subscribedCount, 2) }}
                 </div>
             </div>
             <div class="list-info-button">
@@ -29,7 +31,8 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
+import { tranNumber } from '@/utils/function';
+defineProps({
     songListDetail: { type: Object, default: () => ({}) },
 });
 </script>

@@ -6,7 +6,11 @@
         <div class="play-list-songs">
             <div class="play-list-songs-left">
                 <SongsList :allSongs="state.allSongs" :pageIndex="currentPage"></SongsList>
-                <Pagination :total="total" @currentChange="currentChange"></Pagination>
+                <Pagination
+                    :total="total"
+                    :pageSize="10"
+                    @currentChange="currentChange"
+                ></Pagination>
             </div>
             <div class="play-list-songs-right">
                 <span>简介<br /></span>

@@ -4,6 +4,7 @@
             background
             layout="prev, pager, next"
             :total="total"
+            :page-size="pageSize"
             v-model="currentPage"
             @current-change="currentChange"
         />
@@ -13,6 +14,7 @@
 <script setup lang="ts">
 defineProps({
     total: { type: Number, default: 0 },
+    pageSize: { type: Number, default: 10 },
 });
 const emit = defineEmits(['currentChange', 'update:moduleValue']);
 
