@@ -1,6 +1,6 @@
 // 歌手相关API实例方法
 import ViewModelBase from '@/views/viewModel/ViewModelBase';
-import { SingerCategoryInterface } from '@/types/SingerBizApiInterface'
+import { SingerCategoryInterface, SingerInfoInterface } from '@/types/SingerBizApiInterface'
 
 class SingerViewModel extends ViewModelBase {
     constructor() {
@@ -11,6 +11,12 @@ class SingerViewModel extends ViewModelBase {
     async getSingerCategory(params: SingerCategoryInterface) {
         const result: any = await this._singerBizApi?.getSingerCategory(params);
         return result.artists;
+    }
+
+    // 获取歌手详情
+    async getSingerInfo(params: SingerInfoInterface) {
+        const result: any = await this._singerBizApi?.getSingerInfo(params);
+        return result;
     }
 }
 

@@ -4,8 +4,11 @@
             <ListInfo :songListDetail="state.songListDetail"></ListInfo>
         </div>
         <div class="play-list-songs">
-            <SongsList :allSongs="state.allSongs"></SongsList>
-            <div class="play-list-description">
+            <div class="play-list-songs-left">
+                <SongsList :allSongs="state.allSongs" :pageIndex="currentPage"></SongsList>
+                <Pagination :total="total" @currentChange="currentChange"></Pagination>
+            </div>
+            <div class="play-list-songs-right">
                 <span>简介<br /></span>
                 <div class="desc">
                     {{ state.songListDetail.description }}
@@ -26,6 +29,9 @@ import { PlayListState } from './types/init';
 const route = useRoute();
 const initStore: any = InitStore();
 
+const total = ref(0);
+const currentPage = ref(1);
+
 const state = reactive<PlayListState>({
     songListId: '',
     songListDetail: {},
@@ -45,6 +51,7 @@ const getSongListDetail = async () => {
     state.songListDetail = await SongsViewModel.getPlaylistDetail({
         id: state.songListId,
     });
+    total.value = state.songListDetail?.trackIds?.length || 0;
     // 将歌单详情存入pinia
     initStore.setSongListDetail(state.songListDetail);
 };
@@ -60,11 +67,21 @@ const getAllSongs = async () => {
     // 将歌曲存入pinia
     initStore.setSongList(state.allSongs);
 };
+
+// 切换页码
+const currentChange = async (page: number) => {
+    state.allSongs = await SongsViewModel.getPlaylistAll({
+        id: state.songListId,
+        limit: 10,
+        offset: (page - 1) * 10,
+    });
+    currentPage.value = page;
+};
 </script>
 
 <style lang="scss">
 .play-list-view {
-    @include wh;
+    width: 100%;
     @include flexCenter(false, center, true);
 
     .play-list-info {
@@ -73,25 +90,35 @@ const getAllSongs = async () => {
     }
 
     .play-list-songs {
-        @include whrem(1200, 700);
+        width: pxToRem(1200);
         @include flexCenter(flex-start, flex-start);
 
-        .songs-list-view {
-            @include whrem(888, 50);
+        &-left {
+            width: pxToRem(888);
+            @include flexCenter(center, center, true);
+
+            .songs-list-view {
+                height: pxToRem(548);
+            }
+
+            .pagination-view {
+                @include whrem(100%, 50);
+                @include flexCenter;
+                margin: pxToRem(20) 0;
+            }
         }
 
-        .play-list-description {
+        .play-list-songs-right {
             flex: 1;
-            height: auto;
             margin-left: pxToRem(32);
+            height: pxToRem(548);
+            overflow: auto;
 
             span {
                 font-weight: 600;
             }
 
             .desc {
-                width: 100%;
-                height: auto;
                 text-align: justify;
                 text-justify: distribute-all-lines; // 这行必加，兼容ie浏览器
                 // text-align-last: justify; // 最后一行也是两端对齐

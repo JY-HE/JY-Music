@@ -4,7 +4,7 @@
         <SongListItem
             v-for="(song, index) in (allSongs as Array<any>)"
             :key="song.id"
-            :index="index + 1"
+            :index="index + 1 + (pageIndex - 1) * 10"
             :songInfo="song"
         >
             <template v-slot:song-name-button>
@@ -28,6 +28,7 @@ import { useRouter, useRoute, LocationQueryValue } from 'vue-router';
 
 defineProps({
     allSongs: { type: Array, default: () => [] },
+    pageIndex: { type: Number, default: 1 },
 });
 
 const router = useRouter();

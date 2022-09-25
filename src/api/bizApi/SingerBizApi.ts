@@ -1,5 +1,5 @@
 // 歌手相关api配置
-import { SingerCategoryInterface, SingerRequestConfigsInterface } from '@/types/SingerBizApiInterface'
+import { SingerCategoryInterface, SingerInfoInterface, SingerRequestConfigsInterface } from '@/types/SingerBizApiInterface'
 
 class SingerBizApi {
     // 定义属性
@@ -16,6 +16,8 @@ class SingerBizApi {
         const configs: SingerRequestConfigsInterface = {
             // 获取歌手分类列表
             getSingerCategory: (params: SingerCategoryInterface) => this._getConfig('/artist/list', 'get', params),
+            // 获取歌手详情
+            getSingerInfo: (params: SingerInfoInterface) => this._getConfig('/artist/detail', 'get', params),
 
         };
         this.requestConfigs = configs;

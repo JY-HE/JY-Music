@@ -8,7 +8,7 @@
         <div class="list-info-view-right">
             <div class="list-info-msg">
                 <div class="list-info-msg-name">{{ songListDetail.name }}</div>
-                <div class="list-info-msg-user">歌手</div>
+                <div class="list-info-msg-user">作者</div>
                 <div class="list-info-msg-tag">
                     标签：
                     <span v-for="tag in songListDetail.tags">{{ tag }}&nbsp;&nbsp;</span>
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-defineProps({
+const props = defineProps({
     songListDetail: { type: Object, default: () => ({}) },
 });
 </script>

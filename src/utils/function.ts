@@ -20,7 +20,8 @@ export const formatTime = (duration: number) => {
 
     second = second.padStart(2, '0');
 
-    return `${hour}:${minute}:${second}`;
+    // return `${hour}:${minute}:${second}`;
+    return `${minute}:${second}`;
 };
 
 
