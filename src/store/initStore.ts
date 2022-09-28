@@ -9,7 +9,9 @@ export const InitStore = defineStore({
             searchSongs: [],  // 搜索到的歌曲
             songListDetail: null,  // 歌单详情
             songList: [],  // 歌单中的歌曲
-            playSongUrl: '' // 当前播放歌曲的 url
+            playSongUrl: '', // 当前播放歌曲的 url
+            playSongInfo: null, // 当前播放歌曲的详情
+            playSongLyric: null // 当前播放歌曲的歌词
         }
     },
     // 开启数据缓存
@@ -43,6 +45,12 @@ export const InitStore = defineStore({
         },
         setPlaySongUrl(payload: string) {
             this.playSongUrl = payload
+        },
+        setPlaySongInfo(payload: any) {
+            this.playSongInfo = payload
+        },
+        setPlaySongLyric(payload: any) {
+            this.playSongLyric = payload
         }
     }
 })

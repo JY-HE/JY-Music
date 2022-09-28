@@ -20,6 +20,15 @@ export interface playlistAllInterface {
     offset?: number // 默认值为0
 }
 
+// 获取歌曲详情接口
+export interface songInfoInterface {
+    ids: string // 歌曲id，支持多个 id, 用 , 隔开
+}
+
+export interface songLyricInterface {
+    id: string // 歌曲id
+}
+
 // 请求配置对象接口
 export interface SongsRequestConfigsInterface {
     // 获取推荐歌单配置
@@ -28,6 +37,10 @@ export interface SongsRequestConfigsInterface {
     getPlaylistDetail: (params: playlistDetailInterface) => AxiosRequestConfig
     // 获取歌单所有歌曲配置
     getPlaylistAll: (params: playlistAllInterface) => AxiosRequestConfig
+    // 获取歌曲详情配置
+    getSongInfo: (params: songInfoInterface) => AxiosRequestConfig
+    // 获取歌曲歌词配置
+    getSongLyric: (params: songLyricInterface) => AxiosRequestConfig
 }
 
 // 请求实例方法接口
@@ -38,5 +51,8 @@ export interface SongsRequestMethodsInterface {
     getPlaylistDetail: (params: playlistDetailInterface) => Promise<AxiosResponse>
     // 获取歌单所有歌曲方法
     getPlaylistAll: (params: playlistAllInterface) => Promise<AxiosResponse>
-
+    // 获取歌曲详情方法
+    getSongInfo: (params: songInfoInterface) => Promise<AxiosResponse>
+    // 获取歌曲歌词方法
+    getSongLyric: (params: songLyricInterface) => Promise<AxiosResponse>
 }

@@ -5,5 +5,7 @@ export interface StoreInterface {
     songListDetail: any
     songList: any[]
     playSongUrl: string
+    playSongInfo: any
+    playSongLyric: any
 }
 

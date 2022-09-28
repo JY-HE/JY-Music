@@ -1,6 +1,6 @@
 // 歌单、歌曲相关API实例方法
 import ViewModelBase from '@/views/viewModel/ViewModelBase';
-import { recPlaylistInterface, playlistDetailInterface, playlistAllInterface } from '@/types/SongsBizApiInterface'
+import { recPlaylistInterface, playlistDetailInterface, playlistAllInterface, songInfoInterface, songLyricInterface } from '@/types/SongsBizApiInterface'
 
 class SongsViewModel extends ViewModelBase {
     constructor() {
@@ -23,6 +23,18 @@ class SongsViewModel extends ViewModelBase {
     async getPlaylistAll(params: playlistAllInterface) {
         const result: any = await this._songsBizApi?.getPlaylistAll(params);
         return result.songs;
+    }
+
+    // 获取歌曲详情
+    async getSongInfo(params: songInfoInterface) {
+        const result: any = await this._songsBizApi?.getSongInfo(params);
+        return result.songs;
+    }
+
+    // 获取歌曲歌词
+    async getSongLyric(params: songLyricInterface) {
+        const result: any = await this._songsBizApi?.getSongLyric(params);
+        return result.lrc;
     }
 }
 

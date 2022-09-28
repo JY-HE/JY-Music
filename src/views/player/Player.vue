@@ -11,18 +11,22 @@
                         title="播放"
                         @click="playSong(row.rowData.id)"
                     />
-                    <img src="../../assets/imgs/play.png" alt="" title="播放" />
                 </template>
             </SongsList>
-            <div class="song-info"></div>
+            <div class="song-info">
+                <SongInfo
+                    :songDetail="initStore.playSongInfo[0]"
+                    :songLyric="initStore.playSongLyric"
+                ></SongInfo>
+            </div>
         </div>
         <div class="player-view-play-box">
             <PlayBox></PlayBox>
         </div>
 
-        <!-- <audio controls autoplay class="audio-box" ref="songAudio">
+        <audio controls autoplay class="audio-box" ref="songAudio">
             <source :src="state.songUrl" />
-        </audio> -->
+        </audio>
     </div>
 </template>
 
@@ -33,6 +37,7 @@ import { InitStore } from '@/store/initStore';
 import { useRoute } from 'vue-router';
 import SongsList from '@/views/playList/components/SongsList.vue';
 import PlayBox from './components/PlayBox.vue';
+import SongInfo from './components/SongInfo.vue';
 
 const route = useRoute();
 const initStore: any = InitStore();
@@ -50,8 +55,7 @@ onMounted(() => {
 const style = computed(() => {
     return {
         display: 'block',
-        'background-image':
-            'url(//y.qq.com/music/photo_new/T002R300x300M0000010adya0f83PW.jpg?max_age=2592000)',
+        'background-image': `url(${initStore.playSongInfo[0]?.al?.picUrl})`,
         'background-color': 'rgb(255, 255, 255)',
     };
 });
@@ -86,6 +90,17 @@ const playSong = async (songId: string) => {
             id: songId,
         });
         initStore.setPlaySongUrl(songUrl);
+        // 获取歌曲详情
+        let songInfo = await songsViewModel.getSongInfo({
+            ids: songId,
+        });
+        initStore.setPlaySongInfo(songInfo);
+        // 获取歌词
+        let songLyric = await songsViewModel.getSongLyric({
+            id: songId,
+        });
+        console.log('Rd ~ file: Player.vue ~ line 100 ~ playSong ~ songLyric', songLyric);
+        initStore.setPlaySongLyric(songLyric);
     }
     // 处理从歌单列表页进来
     else {
@@ -145,7 +160,6 @@ const playSong = async (songId: string) => {
 
         .song-info {
             @include whrem(30%, 100%);
-            background-color: aqua;
         }
 
         img {
@@ -157,6 +171,10 @@ const playSong = async (songId: string) => {
         @include whrem(90%, 100);
         margin-top: pxToRem(52);
         z-index: 10;
+    }
+
+    .audio-box {
+        display: none;
     }
 }
 </style>

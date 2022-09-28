@@ -1,5 +1,5 @@
 // 歌单、歌曲相关api配置
-import { recPlaylistInterface, playlistDetailInterface, playlistAllInterface, SongsRequestConfigsInterface } from '@/types/SongsBizApiInterface'
+import { recPlaylistInterface, playlistDetailInterface, playlistAllInterface, songInfoInterface, songLyricInterface, SongsRequestConfigsInterface } from '@/types/SongsBizApiInterface'
 
 class SongsBizApi {
     // 定义属性
@@ -20,6 +20,10 @@ class SongsBizApi {
             getPlaylistDetail: (params: playlistDetailInterface) => this._getConfig('/playlist/detail', 'get', params),
             // 获取歌单所有歌曲
             getPlaylistAll: (params: playlistAllInterface) => this._getConfig('/playlist/track/all', 'get', params),
+            // 获取歌曲详情
+            getSongInfo: (params: songInfoInterface) => this._getConfig('/song/detail', 'get', params),
+            // 获取歌曲歌词
+            getSongLyric: (params: songLyricInterface) => this._getConfig('/lyric', 'get', params),
         };
         this.requestConfigs = configs;
     }
