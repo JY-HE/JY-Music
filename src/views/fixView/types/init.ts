@@ -6,3 +6,9 @@ export interface SearchBoxState {
     songUrl: string,
     loading: Boolean,
 }
+
+// PersonalCenter.vue state 变量接口
+export interface PersonalCenterState {
+    color: string;
+    showSelectBox: Boolean;
+}

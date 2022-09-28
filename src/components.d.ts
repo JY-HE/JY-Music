@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElPagination: typeof import('element-plus/es')['ElPagination']
+    ElSlider: typeof import('element-plus/es')['ElSlider']
     Logo: typeof import('./components/Logo.vue')['default']
     Pagination: typeof import('./components/Pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

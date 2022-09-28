@@ -14,11 +14,15 @@
                     <img src="../../assets/imgs/play.png" alt="" title="播放" />
                 </template>
             </SongsList>
+            <div class="song-info"></div>
+        </div>
+        <div class="player-view-play-box">
+            <PlayBox></PlayBox>
         </div>
 
-        <audio controls autoplay class="audio-box" ref="songAudio">
+        <!-- <audio controls autoplay class="audio-box" ref="songAudio">
             <source :src="state.songUrl" />
-        </audio>
+        </audio> -->
     </div>
 </template>
 
@@ -28,6 +32,7 @@ import searchViewModel from '@/views/viewModel/SearchViewModel';
 import { InitStore } from '@/store/initStore';
 import { useRoute } from 'vue-router';
 import SongsList from '@/views/playList/components/SongsList.vue';
+import PlayBox from './components/PlayBox.vue';
 
 const route = useRoute();
 const initStore: any = InitStore();
@@ -95,7 +100,7 @@ const playSong = async (songId: string) => {
     @include wh;
     position: relative;
     overflow: hidden;
-    @include flexCenter;
+    @include flexCenter(center, center, true);
 
     &-bg-mask,
     &-bg {
@@ -121,17 +126,37 @@ const playSong = async (songId: string) => {
     }
 
     &-songs-box {
-        @include whrem(1626, 666);
-        overflow: auto;
+        @include whrem(90%, 666);
         z-index: 10;
+        @include flexCenter;
 
-        .songs-list-item {
-            color: rgba(var(--theme-background-color), 1) !important;
+        .songs-list-view {
+            @include whrem(70%, 100%);
+            overflow: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .songs-list-item {
+                color: rgba(var(--theme-background-color), 1) !important;
+            }
+        }
+
+        .song-info {
+            @include whrem(30%, 100%);
+            background-color: aqua;
         }
 
         img {
             @include whrem(32);
         }
+    }
+
+    &-play-box {
+        @include whrem(90%, 100);
+        margin-top: pxToRem(52);
+        z-index: 10;
     }
 }
 </style>

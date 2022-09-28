@@ -1,14 +1,15 @@
 import { defineStore } from 'pinia'
+import { StoreInterface } from '@/types/StoreInterface'
 
 export const InitStore = defineStore({
     id: 'init', // id必填，且需要唯一
-    state: () => {
+    state: (): StoreInterface => {
         return {
-            config: ref<any>(null), // 配置项
-            searchSongs: ref<Array<object>>([]),  // 搜索到的歌曲
-            songListDetail: ref<object>({}),  // 歌单详情
-            songList: ref<Array<object>>([]),  // 歌单中的歌曲
-            playSongUrl: ref<string>('') // 当前播放歌曲的 url
+            config: null, // 配置项
+            searchSongs: [],  // 搜索到的歌曲
+            songListDetail: null,  // 歌单详情
+            songList: [],  // 歌单中的歌曲
+            playSongUrl: '' // 当前播放歌曲的 url
         }
     },
     // 开启数据缓存

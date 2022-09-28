@@ -20,15 +20,13 @@
 
 <script setup lang="ts">
 import theme from '@/utils/theme';
+import { PersonalCenterState } from '../types/init';
 
 const props = defineProps({
     initStore: { type: Object, default: () => ({}) },
 });
 
-const state = reactive<{
-    color: string;
-    showSelectBox: Boolean;
-}>({
+const state = reactive<PersonalCenterState>({
     color: '',
     showSelectBox: false,
 });

@@ -20,12 +20,6 @@
 import searchViewModel from '@/views/viewModel/SearchViewModel';
 import { SearchBoxState } from '../types/init';
 
-const props = defineProps({
-    playSongUrl: { type: String, default: '' },
-});
-
-const songAudio = ref<HTMLAudioElement>();
-
 const state = reactive<SearchBoxState>({
     hotSongs: [],
     searchSongs: [],
@@ -38,10 +32,6 @@ onMounted(async () => {
     // 获取热搜列表
     state.hotSongs = await searchViewModel.getSongHot();
     console.log('Rd ~ file: SearchBox.vue ~ line 37 ~ onMounted ~ state.hotSongs', state.hotSongs);
-});
-
-const songsList = computed(() => {
-    return state.searchSongs.length ? state.searchSongs : state.hotSongs;
 });
 
 // 关键词搜索

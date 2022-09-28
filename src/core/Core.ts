@@ -5,6 +5,7 @@ import router from '@/router';
 import bizService from '@/service'
 import '@/assets/css/public.css'
 import '@/utils/resize'
+import '@/assets/iconfont/iconfont.css';
 
 
 class Core {
