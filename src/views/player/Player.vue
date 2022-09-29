@@ -25,9 +25,10 @@
                 :playSongInfo="initStore.playSongInfo[0]"
                 :duration="state.duration"
                 :currentTime="(state.currentTime as number)"
+                :songState="(state.songState as boolean)"
                 @speedValue="speedValue"
                 @handlerSongState="handlerSongState"
-                :songState="(state.songState as boolean)"
+                @voiceValue="voiceValue"
             ></PlayBox>
         </div>
 
@@ -140,8 +141,13 @@ const onTimeUpdate = () => {
 };
 
 // 改变播放进度
-const speedValue = (newVal: any) => {
-    songAudio.value!.currentTime = newVal;
+const speedValue = (val: any) => {
+    songAudio.value!.currentTime = val;
+};
+
+// 改变音量
+const voiceValue = (val: any) => {
+    songAudio.value!.volume = val;
 };
 
 // 歌曲开始播放事件

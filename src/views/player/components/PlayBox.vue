@@ -60,7 +60,14 @@
             </div>
             <div class="voice">
                 <i class="iconfont icon-shengyin"></i>
-                <el-slider v-model="state.voiceValue" />
+                <el-slider
+                    v-model="state.voiceValue"
+                    :show-tooltip="false"
+                    :max="1"
+                    :min="0"
+                    :step="0.01"
+                    @change="voiceValueChange"
+                />
             </div>
         </div>
     </div>
@@ -74,12 +81,12 @@ const props = defineProps({
     currentTime: { type: Number, default: 0 },
     songState: { type: Boolean, default: false },
 });
-const emit = defineEmits(['speedValue', 'handlerSongState']);
+const emit = defineEmits(['speedValue', 'handlerSongState', 'voiceValue']);
 
 const state = reactive({
     palyWayIndex: 0,
     modelOrder: false,
-    voiceValue: 10,
+    voiceValue: 1,
     speedValue: 0,
     collect: false,
     songPause: false,
@@ -142,6 +149,11 @@ const handlerModel = () => {
 // 改变播放进度
 const speedValueChange = (newVal: any) => {
     emit('speedValue', newVal);
+};
+
+// 改变音量
+const voiceValueChange = (newVal: any) => {
+    emit('voiceValue', newVal);
 };
 </script>
 
