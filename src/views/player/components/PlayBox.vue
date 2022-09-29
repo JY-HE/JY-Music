@@ -37,14 +37,10 @@
             </div>
         </div>
         <div class="other-btn">
-            <a
-                href="javascript:void(0)"
-                class="play-way"
-                @click="playWay"
-                :title="playWayInfo[state.palyWayIndex]"
-            >
+            <div class="play-way" @click="playWay" :title="playWayInfo[state.palyWayIndex]">
                 <i :class="['iconfont', playWayMap.get(state.palyWayIndex)]"></i>
-            </a>
+                <span class="single" v-if="state.palyWayIndex === 1">1</span>
+            </div>
             <a href="javascript:void(0)" class="collect" @click="handlerCollect">
                 <i :class="['iconfont', state.collect ? 'icon-xihuan' : 'icon-xihuan1']"></i>
             </a>
@@ -81,7 +77,7 @@ const props = defineProps({
     currentTime: { type: Number, default: 0 },
     songState: { type: Boolean, default: false },
 });
-const emit = defineEmits(['speedValue', 'handlerSongState', 'voiceValue']);
+const emit = defineEmits(['speedValue', 'handlerSongState', 'voiceValue', 'playWay']);
 
 const state = reactive({
     palyWayIndex: 0,
@@ -95,13 +91,14 @@ const state = reactive({
 const playWayMap = computed(() => {
     return new Map([
         [0, 'icon-24gl-repeat2'],
-        [1, 'icon-suijibofang'],
-        [2, 'icon-shunxubofang'],
+        [1, 'icon-24gl-repeat2'],
+        [2, 'icon-suijibofang'],
+        [3, 'icon-shunxubofang'],
     ]);
 });
 
 const playWayInfo = computed(() => {
-    return ['列表播放', '随机播放', '顺序播放'];
+    return ['列表播放', '单曲播放', '随机播放', '顺序播放'];
 });
 
 // 进度条
@@ -131,9 +128,10 @@ const handlerSongState = () => {
 // 切换播放模式
 const playWay = () => {
     state.palyWayIndex += 1;
-    if (state.palyWayIndex > 2) {
+    if (state.palyWayIndex > 3) {
         state.palyWayIndex = 0;
     }
+    emit('playWay', state.palyWayIndex);
 };
 
 // 收藏歌曲
@@ -204,6 +202,22 @@ const voiceValueChange = (newVal: any) => {
     .other-btn {
         @include whrem(500, 100%);
         @include flexCenter(space-around, center);
+
+        .play-way {
+            position: relative;
+            @include whrem(32);
+            color: #e6e6e6;
+            @include cursor;
+
+            i {
+                font-size: pxToRem(32);
+            }
+
+            .single {
+                @include position(absolute, top 50% left 50%);
+                transform: translate(-50%, -50%);
+            }
+        }
 
         .model {
             @include whrem(84, 32);

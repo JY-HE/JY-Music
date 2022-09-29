@@ -22,12 +22,13 @@
 </template>
 
 <script setup lang="ts">
+import { songInfoState } from '../types/init';
 const props = defineProps({
     songDetail: { type: Object, default: () => ({}) },
     songLyric: { type: Object, default: () => ({}) },
 });
 
-const state = reactive({
+const state = reactive<songInfoState>({
     songName: '',
     users: [],
     songAlbum: '',

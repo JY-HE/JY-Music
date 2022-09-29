@@ -29,6 +29,7 @@
                 @speedValue="speedValue"
                 @handlerSongState="handlerSongState"
                 @voiceValue="voiceValue"
+                @playWay="handlerPlayWay"
             ></PlayBox>
         </div>
 
@@ -40,6 +41,7 @@
             @timeupdate="onTimeUpdate"
             @play="songStart"
             @ended="songEnd"
+            :loop="(state.loop as boolean)"
         >
             <source :src="(state.songUrl as string)" />
         </audio>
@@ -65,6 +67,7 @@ const state = reactive<PlayerState>({
     songState: false,
     duration: 0,
     currentTime: 0,
+    loop: false,
 });
 
 onMounted(() => {
@@ -148,6 +151,26 @@ const speedValue = (val: any) => {
 // 改变音量
 const voiceValue = (val: any) => {
     songAudio.value!.volume = val;
+};
+
+// 改变播放方式
+const handlerPlayWay = (val: number) => {
+    switch (val) {
+        case 0:
+            state.loop = false;
+            break;
+        case 1:
+            state.loop = true;
+            break;
+        case 2:
+            state.loop = false;
+            break;
+        case 3:
+            state.loop = false;
+            break;
+        default:
+            break;
+    }
 };
 
 // 歌曲开始播放事件
