@@ -3,10 +3,11 @@
 export interface PlayerState {
     allSongs: any
     songUrl: string
-    songState: Boolean
+    songState: boolean
     duration: any
-    currentTime: Number | undefined
-    loop: Boolean
+    currentTime: number | undefined
+    loop: boolean
+    songIndex: number
 }
 
 // SongInfo.vue state 变量接口

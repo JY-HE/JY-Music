@@ -6,9 +6,10 @@
             :key="song.id"
             :index="index + 1 + (pageIndex - 1) * 10"
             :songInfo="song"
+            :songActive="songActiveIndex === index"
         >
             <template v-slot:song-name-button>
-                <slot name="name-button" :rowData="song">
+                <slot name="name-button" :rowData="song" :songIndex="index">
                     <img
                         src="../../../assets/imgs/play.png"
                         alt=""
@@ -29,6 +30,7 @@ import { useRouter, useRoute, LocationQueryValue } from 'vue-router';
 defineProps({
     allSongs: { type: Array, default: () => [] },
     pageIndex: { type: Number, default: 1 },
+    songActiveIndex: { type: Number, default: -1 },
 });
 
 const router = useRouter();

@@ -8,7 +8,8 @@ export const InitStore = defineStore({
             config: null, // 配置项
             searchSongs: [],  // 搜索到的歌曲
             songListDetail: null,  // 歌单详情
-            songList: [],  // 歌单中的歌曲
+            songList: [],  // 歌单中的十首歌曲
+            songListAll: [],  // 歌单中的全部歌曲
             playSongUrl: '', // 当前播放歌曲的 url
             playSongInfo: null, // 当前播放歌曲的详情
             playSongLyric: null // 当前播放歌曲的歌词
@@ -42,6 +43,9 @@ export const InitStore = defineStore({
         },
         setSongList(payload: Array<object>) {
             this.songList = payload
+        },
+        setSongListALL(payload: Array<object>) {
+            this.songListAll = payload
         },
         setPlaySongUrl(payload: string) {
             this.playSongUrl = payload

@@ -3,13 +3,13 @@
         <div class="player-view-bg-mask"></div>
         <div class="player-view-bg" :style="style"></div>
         <div class="player-view-songs-box">
-            <SongsList :allSongs="state.allSongs">
+            <SongsList :allSongs="initStore.songListAll" :songActiveIndex="state.songIndex">
                 <template v-slot:name-button="row">
                     <img
                         src="../../assets/imgs/play.png"
                         alt=""
                         title="播放"
-                        @click="playSong(row.rowData.id)"
+                        @click="playSong(row.rowData.id, row.songIndex)"
                     />
                 </template>
             </SongsList>
@@ -24,8 +24,8 @@
             <PlayBox
                 :playSongInfo="initStore.playSongInfo[0]"
                 :duration="state.duration"
-                :currentTime="(state.currentTime as number)"
-                :songState="(state.songState as boolean)"
+                :currentTime="state.currentTime"
+                :songState="state.songState"
                 @speedValue="speedValue"
                 @handlerSongState="handlerSongState"
                 @voiceValue="voiceValue"
@@ -41,9 +41,9 @@
             @timeupdate="onTimeUpdate"
             @play="songStart"
             @ended="songEnd"
-            :loop="(state.loop as boolean)"
+            :loop="state.loop"
         >
-            <source :src="(state.songUrl as string)" />
+            <source :src="state.songUrl" />
         </audio>
     </div>
 </template>
@@ -68,11 +68,12 @@ const state = reactive<PlayerState>({
     duration: 0,
     currentTime: 0,
     loop: false,
+    songIndex: -1,
 });
 
 onMounted(() => {
-    playSong('');
     getAllSongs();
+    init();
 });
 
 const style = computed(() => {
@@ -95,6 +96,14 @@ watch(
     { deep: true }
 );
 
+const init = () => {
+    if (initStore.playSongInfo.length) {
+        const { name, id } = initStore.playSongInfo[0];
+        const index = initStore.songListAll?.findIndex((item: any) => item.name === name);
+        playSong(id, index);
+    }
+};
+
 // 获取歌单所有歌曲
 const getAllSongs = async () => {
     state.allSongs = await songsViewModel.getPlaylistAll({
@@ -102,11 +111,12 @@ const getAllSongs = async () => {
     });
     console.log('Rd ~ file: Player.vue ~ line 38 ~ getAllSongs ~ state.allSongs', state.allSongs);
     // 将歌曲存入pinia
-    // initStore.setSongList(state.allSongs);
+    initStore.setSongListALL(state.allSongs);
 };
 
 // 播放歌曲
-const playSong = async (songId: string) => {
+const playSong = async (songId: string, songIndex: number) => {
+    state.songIndex = songIndex;
     if (songId) {
         // 获取歌曲 url
         let songUrl = await searchViewModel.getSongUrl({
@@ -128,7 +138,7 @@ const playSong = async (songId: string) => {
     // 处理从歌单列表页进来
     else {
         state.songUrl = initStore.playSongUrl;
-        songAudio.value!.src = state.songUrl as string;
+        songAudio.value!.src = state.songUrl;
     }
 };
 

@@ -1,7 +1,7 @@
 <template>
     <div :class="['songs-list-item', isHead && 'songs-list-item-head']">
         <p class="songs-list-item-index">{{ index >= 0 ? index : '' }}</p>
-        <p class="songs-list-item-songName" :title="songName">
+        <p :class="['songs-list-item-songName',songActive && 'active']" :title="songName">
             <span>{{ isHead ? '歌曲' : songName }}</span>
         <div class="slot-button">
             <slot name="song-name-button"></slot>
@@ -24,6 +24,7 @@ const props = defineProps({
     index: { type: Number, default: -1 },
     songInfo: { type: Object, default: () => ({}) },
     isHead: { type: Boolean, default: false },
+    songActive: { type: Boolean, default: false },
 });
 const {
     name: songName = '',
@@ -66,6 +67,10 @@ const {
                 @include flexCenter;
             }
 
+        }
+
+        &.active{
+            color: rgba(var(--theme-color),1);
         }
 
         span {
