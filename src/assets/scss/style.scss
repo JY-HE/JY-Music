@@ -27,3 +27,24 @@
         }
     }
 }
+
+.el-slider {
+    height: pxToRem(22);
+    .el-slider__runway {
+        height: pxToRem(3);
+        background: #888787;
+
+        .el-slider__bar {
+            background: #fff;
+            height: pxToRem(4);
+        }
+
+        .el-slider__button-wrapper {
+            .el-slider__button {
+                border: none;
+                @include whrem(14);
+                margin-bottom: pxToRem(2);
+            }
+        }
+    }
+}

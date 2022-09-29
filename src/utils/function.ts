@@ -3,10 +3,15 @@
  * @param duration 音乐时长
  * @return
  */
-export const formatTime = (duration: number) => {
-    if (duration < -1) return;
+export const formatTime = (duration: number | string) => {
 
     let time: number = Number(duration) / 1000;
+
+    if (time < -1) return;
+
+    if (time === 0) {
+        return `00:00`;
+    }
 
     let hour: string = Math.floor(time / 60 / 60).toString();
 
@@ -21,6 +26,37 @@ export const formatTime = (duration: number) => {
     second = second.padStart(2, '0');
 
     // return `${hour}:${minute}:${second}`;
+    return `${minute}:${second}`;
+};
+
+
+/**
+ * @desc 秒数转化为时分秒
+ * @param {Number} duration 秒数
+ * @return
+ */
+export const formatSeconds = (duration: number | string) => {
+
+    let time: number = Number(duration);
+
+    if (time < -1) return;
+
+    if (time === 0) {
+        return `00:00`;
+    }
+
+    let hour: string = Math.floor(time / 60 / 60 % 24).toString();
+
+    hour = hour.padStart(2, '0');
+
+    let minute: string = (Math.floor(time / 60) % 60).toString();
+
+    minute = minute.padStart(2, '0');
+
+    let second: string = (Math.floor(time) % 60).toString();
+
+    second = second.padStart(2, '0');
+
     return `${minute}:${second}`;
 };
 

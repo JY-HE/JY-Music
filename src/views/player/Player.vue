@@ -21,11 +21,26 @@
             </div>
         </div>
         <div class="player-view-play-box">
-            <PlayBox></PlayBox>
+            <PlayBox
+                :playSongInfo="initStore.playSongInfo[0]"
+                :duration="state.duration"
+                :currentTime="(state.currentTime as number)"
+                @speedValue="speedValue"
+                @handlerSongState="handlerSongState"
+                :songState="(state.songState as boolean)"
+            ></PlayBox>
         </div>
 
-        <audio controls autoplay class="audio-box" ref="songAudio">
-            <source :src="state.songUrl" />
+        <audio
+            controls
+            autoplay
+            class="audio-box"
+            ref="songAudio"
+            @timeupdate="onTimeUpdate"
+            @play="songStart"
+            @ended="songEnd"
+        >
+            <source :src="(state.songUrl as string)" />
         </audio>
     </div>
 </template>
@@ -38,13 +53,17 @@ import { useRoute } from 'vue-router';
 import SongsList from '@/views/playList/components/SongsList.vue';
 import PlayBox from './components/PlayBox.vue';
 import SongInfo from './components/SongInfo.vue';
+import { PlayerState } from './types/init';
 
 const route = useRoute();
 const initStore: any = InitStore();
 const songAudio = ref<HTMLAudioElement>();
-const state = reactive({
+const state = reactive<PlayerState>({
     allSongs: [],
     songUrl: '',
+    songState: false,
+    duration: 0,
+    currentTime: 0,
 });
 
 onMounted(() => {
@@ -105,7 +124,42 @@ const playSong = async (songId: string) => {
     // 处理从歌单列表页进来
     else {
         state.songUrl = initStore.playSongUrl;
-        songAudio.value!.src = state.songUrl;
+        songAudio.value!.src = state.songUrl as string;
+    }
+};
+
+// 歌曲播放时间更新事件
+const onTimeUpdate = () => {
+    // 歌曲总时间
+    state.duration = songAudio.value?.duration;
+    if (isNaN(state.duration)) {
+        state.duration = 0;
+    }
+    // 当前播放时间
+    state.currentTime = songAudio.value?.currentTime;
+};
+
+// 改变播放进度
+const speedValue = (newVal: any) => {
+    songAudio.value!.currentTime = newVal;
+};
+
+// 歌曲开始播放事件
+const songStart = () => {
+    state.songState = true;
+};
+
+// 歌曲结束播放
+const songEnd = () => {
+    state.songState = false;
+};
+
+// 播放或暂停
+const handlerSongState = (val: Boolean) => {
+    if (val) {
+        songAudio.value?.play();
+    } else {
+        songAudio.value?.pause();
     }
 };
 </script>

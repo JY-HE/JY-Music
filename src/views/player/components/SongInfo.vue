@@ -12,7 +12,11 @@
             <p>专辑：{{ state.songAlbum }}</p>
         </div>
         <div class="song-info-lyrics">
-            <pre class="lyrics">{{ state.lyric }}</pre>
+            <ul>
+                <li v-for="(lyric, index) in state.lyrics" :key="index">
+                    {{ lyric[1] }}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -28,7 +32,7 @@ const state = reactive({
     users: [],
     songAlbum: '',
     picUrl: '',
-    lyric: '',
+    lyrics: '',
 });
 
 watch(
@@ -45,7 +49,14 @@ watch(
 watch(
     () => props.songLyric,
     newVal => {
-        state.lyric = newVal?.lyric;
+        let lyric = newVal?.lyric.split('\n');
+        state.lyrics = lyric?.map((item: any) => {
+            item = item.split(']');
+            let time = item[0].match(/(?<=\[).*/g);
+            // console.log('Rd ~ file: SongInfo.vue ~ line 53 ~ time', time);
+            item[0] = time?.[0] || '';
+            return item;
+        });
     },
     { deep: true, immediate: true }
 );
@@ -66,7 +77,8 @@ watch(
 
     .song-info-info {
         @include flexCenter(center, center, true);
-
+        color: #e6e6e6;
+        font-size: pxToRem(14);
         p {
             line-height: pxToRem(18);
             margin: pxToRem(8);
@@ -77,10 +89,18 @@ watch(
         width: pxToRem(350);
         flex: 1;
         overflow: hidden;
+        margin-top: pxToRem(16);
 
-        .lyrics {
+        ul {
             @include wh;
-            @include flexCenter(center, false);
+            @include flexCenter(false, center, true);
+            margin: 0;
+            padding: 0;
+            li {
+                color: #e6e6e6;
+                font-size: pxToRem(14);
+                line-height: pxToRem(32);
+            }
         }
     }
 }

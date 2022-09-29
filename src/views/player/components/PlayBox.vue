@@ -1,17 +1,41 @@
 <template>
     <div class="play-box-view">
         <div class="state-btn">
-            <a href="" class="prev">
+            <a href="javascript:void(0)" class="prev">
                 <i class="iconfont icon-shangyishou"></i>
             </a>
-            <a href="" :class="['stop', 'play']">
-                <i class="iconfont icon-24gf-pause2"></i>
+            <a href="javascript:void(0)" @click="handlerSongState">
+                <i
+                    :class="['iconfont', state.songPause ? 'icon-24gf-pause2' : 'icon-24gf-play']"
+                ></i>
             </a>
-            <a href="" class="next">
+            <a href="javascript:void(0)" class="next">
                 <i class="iconfont icon-xiayishou"></i>
             </a>
         </div>
-        <div class="speed-box"></div>
+        <div class="speed-box">
+            <div class="speed-box__info">
+                <div>
+                    <span>{{ `${props.playSongInfo.name || ''} - ` }}</span>
+                    <span v-for="user in props.playSongInfo.ar" :key="user.id"
+                        >{{ user.name }}&nbsp;&nbsp;</span
+                    >
+                </div>
+                <div>
+                    <span>{{ formatSeconds(props.currentTime) }} / </span>
+                    <span>{{ formatSeconds(props.duration) }}</span>
+                </div>
+            </div>
+            <div class="speed-box__speed">
+                <el-slider
+                    v-model="state.speedValue"
+                    :show-tooltip="false"
+                    :max="props.duration"
+                    :min="0"
+                    @change="speedValueChange"
+                />
+            </div>
+        </div>
         <div class="other-btn">
             <a
                 href="javascript:void(0)"
@@ -43,11 +67,22 @@
 </template>
 
 <script setup lang="ts">
+import { formatSeconds } from '@/utils/function';
+const props = defineProps({
+    playSongInfo: { type: Object, default: () => ({}) },
+    duration: { type: Number, default: 0 },
+    currentTime: { type: Number, default: 0 },
+    songState: { type: Boolean, default: false },
+});
+const emit = defineEmits(['speedValue', 'handlerSongState']);
+
 const state = reactive({
     palyWayIndex: 0,
     modelOrder: false,
     voiceValue: 10,
+    speedValue: 0,
     collect: false,
+    songPause: false,
 });
 
 const playWayMap = computed(() => {
@@ -61,6 +96,30 @@ const playWayMap = computed(() => {
 const playWayInfo = computed(() => {
     return ['列表播放', '随机播放', '顺序播放'];
 });
+
+// 进度条
+watch(
+    () => props.currentTime,
+    newVal => {
+        state.speedValue = newVal;
+    },
+    { immediate: true }
+);
+
+// 歌曲开始播放或播放结束
+watch(
+    () => props.songState,
+    newVal => {
+        state.songPause = newVal;
+    },
+    { immediate: true }
+);
+
+// 播放或暂停
+const handlerSongState = () => {
+    state.songPause = !state.songPause;
+    emit('handlerSongState', state.songPause);
+};
 
 // 切换播放模式
 const playWay = () => {
@@ -79,6 +138,11 @@ const handlerCollect = () => {
 const handlerModel = () => {
     state.modelOrder = !state.modelOrder;
 };
+
+// 改变播放进度
+const speedValueChange = (newVal: any) => {
+    emit('speedValue', newVal);
+};
 </script>
 
 <style lang="scss">
@@ -95,6 +159,7 @@ const handlerModel = () => {
         }
         i {
             font-size: pxToRem(32);
+            transition: all 0.5s;
         }
     }
 
@@ -111,8 +176,17 @@ const handlerModel = () => {
 
     .speed-box {
         @include whrem(920, 100%);
-        @include flexCenter;
-        background-color: aqua;
+        @include flexCenter(center, center, true);
+        color: #e6e6e6;
+
+        &__info {
+            @include whrem(100%, 32);
+            @include flexCenter(space-between, center);
+        }
+
+        &__speed {
+            width: 100%;
+        }
     }
 
     .other-btn {
