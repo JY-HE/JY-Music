@@ -22,8 +22,8 @@
                     >
                 </div>
                 <div>
-                    <span>{{ formatSeconds(props.currentTime) }} / </span>
-                    <span>{{ formatSeconds(props.duration) }}</span>
+                    <span>{{ moment.utc(props.currentTime * 1000).format('mm:ss') }} / </span>
+                    <span>{{ moment.utc(props.duration * 1000).format('mm:ss') }}</span>
                 </div>
             </div>
             <div class="speed-box__speed">
@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatSeconds } from '@/utils/function';
+import moment from 'moment';
 const props = defineProps({
     playSongInfo: { type: Object, default: () => ({}) },
     duration: { type: Number, default: 0 },

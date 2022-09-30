@@ -53,6 +53,27 @@ export default defineConfig({
     //   },
     // }
   },
+  build: {
+    target: 'es2015',
+    outDir: 'dist', //指定输出路径
+    assetsDir: 'assets', // 指定生成静态资源的存放路径
+    assetsInlineLimit: 2048,
+    cssCodeSplit: true,
+    // Terser 相对较慢，但大多数情况下构建后的文件体积更小。ESbuild 最小化混淆更快但构建后的文件相对更大。
+    // minify: isDev ? 'esbuild' : 'terser',
+    minify: 'esbuild',
+    terserOptions: {
+      compress: {
+        // 生产环境去除console
+        // drop_console: !isDev,
+      },
+    },
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+      },
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {

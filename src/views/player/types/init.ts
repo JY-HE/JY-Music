@@ -16,5 +16,8 @@ export interface songInfoState {
     users: any,
     songAlbum: string,
     picUrl: string,
-    lyrics: string,
+    lyrics: any[],
+    time: string | undefined
+    lyricIndex: number
+    translate: number
 }

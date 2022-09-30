@@ -12,8 +12,12 @@
             <p>专辑：{{ state.songAlbum }}</p>
         </div>
         <div class="song-info-lyrics">
-            <ul>
-                <li v-for="(lyric, index) in state.lyrics" :key="index">
+            <ul ref="lyric" :style="{ transform: `translateY(-${state.translate}px)` }">
+                <li
+                    v-for="(lyric, index) in state.lyrics"
+                    :key="index"
+                    :class="state.lyricIndex === index ? 'lyricActive' : ''"
+                >
                     {{ lyric[1] }}
                 </li>
             </ul>
@@ -22,18 +26,26 @@
 </template>
 
 <script setup lang="ts">
+import moment from 'moment';
 import { songInfoState } from '../types/init';
+
 const props = defineProps({
     songDetail: { type: Object, default: () => ({}) },
     songLyric: { type: Object, default: () => ({}) },
+    currentTime: { type: Number, default: 0 },
 });
+
+const lyric = ref<HTMLElement | null>(null);
 
 const state = reactive<songInfoState>({
     songName: '',
     users: [],
     songAlbum: '',
     picUrl: '',
-    lyrics: '',
+    lyrics: [],
+    time: '',
+    lyricIndex: 0,
+    translate: 0,
 });
 
 watch(
@@ -53,13 +65,37 @@ watch(
         let lyric = newVal?.lyric.split('\n');
         state.lyrics = lyric?.map((item: any) => {
             item = item.split(']');
-            let time = item[0].match(/(?<=\[).*/g);
-            // console.log('Rd ~ file: SongInfo.vue ~ line 53 ~ time', time);
-            item[0] = time?.[0] || '';
+            // 去掉秒数的小数位并补上小时数
+            let hms = `00:${item[0].match(/(?<=\[).*(?=\.)/g)}`;
+            // 转为秒数
+            item[0] = moment.duration(hms).as('seconds');
             return item;
         });
+        // 删除最后一个NaN元素
+        state.lyrics.pop();
+        console.log(
+            'Rd ~ file: SongInfo.vue ~ line 61 ~ state.lyrics=lyric?.map ~ state.lyrics',
+            state.lyrics
+        );
     },
-    { deep: true, immediate: true }
+    { deep: true }
+);
+
+watch(
+    () => props.currentTime,
+    newVal => {
+        state.lyrics?.forEach((item, index) => {
+            if (newVal >= item[0] && newVal < state.lyrics[index + 1][0]) {
+                if (item[1]) {
+                    state.lyricIndex = index;
+                    // 歌词滚动的距离
+                    state.translate = index * 30;
+                }
+                return;
+            }
+        });
+    },
+    { deep: true }
 );
 </script>
 
@@ -97,10 +133,16 @@ watch(
             @include flexCenter(false, center, true);
             margin: 0;
             padding: 0;
+            transition: transform 0.1s ease-out 0s;
+
             li {
                 color: #e6e6e6;
                 font-size: pxToRem(14);
                 line-height: pxToRem(32);
+
+                &.lyricActive {
+                    color: rgba(var(--theme-color));
+                }
             }
         }
     }

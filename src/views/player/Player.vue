@@ -17,6 +17,7 @@
                 <SongInfo
                     :songDetail="initStore.playSongInfo[0]"
                     :songLyric="initStore.playSongLyric"
+                    :currentTime="state.currentTime"
                 ></SongInfo>
             </div>
         </div>
