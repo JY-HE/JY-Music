@@ -51,7 +51,7 @@ const {
         display: inline-block;
         width: pxToRem(50);
         padding-left: pxToRem(10);
-        color: rgb(153, 151, 151);
+        color: rgba(var(--font-base-color), 0.7);
     }
 
     &-songName {
@@ -105,18 +105,18 @@ const {
     &-songTime {
         display: inline-block;
         width: pxToRem(70);
-        color: rgb(153, 151, 151);
+        color: rgba(var(--font-base-color), 0.7);
     }
 }
 
 .songs-list-item-head {
-    color: rgb(153, 151, 151);
+    color: rgba(var(--font-base-color), 0.7);
 
     .songs-list-item-songName {
         cursor: default;
 
         @include hover {
-            color: rgb(153, 151, 151);
+            color: rgba(var(--font-base-color), 0.7);
 
             img {
                 display: none;
@@ -129,7 +129,7 @@ const {
         cursor: default;
 
         &:hover {
-            color: rgb(153, 151, 151);
+            color: rgba(var(--font-base-color), 0.7);
         }
     }
 }

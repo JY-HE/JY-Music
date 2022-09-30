@@ -2,6 +2,9 @@
     <div class="player-view">
         <div class="player-view-bg-mask"></div>
         <div class="player-view-bg" :style="style"></div>
+        <div class="player-view-buttons">
+            <ButtonList></ButtonList>
+        </div>
         <div class="player-view-songs-box">
             <SongsList :allSongs="initStore.songListAll" :songActiveIndex="state.songIndex">
                 <template v-slot:name-button="row">
@@ -57,6 +60,7 @@ import { useRoute } from 'vue-router';
 import SongsList from '@/views/playList/components/SongsList.vue';
 import PlayBox from './components/PlayBox.vue';
 import SongInfo from './components/SongInfo.vue';
+import ButtonList from './components/ButtonList.vue';
 import { PlayerState } from './types/init';
 
 const route = useRoute();
@@ -234,10 +238,20 @@ const handlerSongState = (val: Boolean) => {
         transform: translateZ(0);
     }
 
+    &-buttons {
+        @include whrem(100%, 100);
+        @include flexCenter;
+        z-index: 10;
+
+        .button-list-view {
+            @include whrem(90%, 100%);
+        }
+    }
+
     &-songs-box {
         @include whrem(90%, 666);
         z-index: 10;
-        @include flexCenter;
+        @include flexCenter(center, center);
 
         .songs-list-view {
             @include whrem(70%, 100%);
@@ -248,7 +262,23 @@ const handlerSongState = (val: Boolean) => {
             }
 
             .songs-list-item {
-                color: rgba(var(--theme-background-color), 1) !important;
+                color: rgba(var(--theme-background-color), 1);
+                background: transparent;
+
+                .songs-list-item-index,
+                .songs-list-item-songTime {
+                    color: rgba(var(--theme-background-color), 0.3);
+                }
+            }
+
+            .songs-list-item-head {
+                .songs-list-item-songName,
+                .songs-list-item-songUser,
+                .songs-list-item-songAlbum {
+                    &:hover {
+                        color: rgba(var(--theme-background-color), 1) !important;
+                    }
+                }
             }
         }
 
